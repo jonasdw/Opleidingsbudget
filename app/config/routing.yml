@@ -1,0 +1,4 @@
+tactics_opledingsbudget:
+    resource: "@TacticsOpledingsbudgetBundle/Resources/config/routing.yml"
+    prefix:   /
+
