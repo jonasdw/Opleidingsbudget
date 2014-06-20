@@ -1,0 +1,14 @@
+Tactics\OpleidingsbudgetBundle\Entity\User:
+    type: entity
+    table: user
+
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+

@@ -1,7 +1,0 @@
-parameters:
-#    tactics_opledingsbudget.example.class: Tactics\OpledingsbudgetBundle\Example
-
-services:
-#    tactics_opledingsbudget.example:
-#        class: %tactics_opledingsbudget.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

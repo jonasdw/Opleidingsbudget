@@ -1,6 +1,6 @@
 <?php
 
-namespace Tactics\OpledingsbudgetBundle\Tests\Controller;
+namespace Tactics\OpleidingsbudgetBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

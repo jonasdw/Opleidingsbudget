@@ -1,3 +1,0 @@
-tactics_opledingsbudget_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: TacticsOpledingsbudgetBundle:Default:index }
