@@ -12,3 +12,10 @@ Tactics\OpleidingsbudgetBundle\Entity\User:
             generator:
                 strategy: IDENTITY
 
+    fields:
+        first_name:
+            type: text
+            length: 255
+        name:
+            type: text
+            length: 255

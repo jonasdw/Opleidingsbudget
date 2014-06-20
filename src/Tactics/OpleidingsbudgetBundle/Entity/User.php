@@ -17,11 +17,28 @@ class User extends BaseUser
 
     protected $id;
 
+    private $first_name;
+
+    private $name;
 
     public function __construct()
     {
         parent::__construct();
         // your own logic
+    }
+
+    public function getFirstName(){
+        return $this->first_name;
+    }
+    public function setFirstName($first_name){
+        $this->first_name = $first_name;
+    }
+
+    public function getName(){
+        return $this->name;
+    }
+    public function setName($name){
+        $this->name = $name;
     }
 
 
