@@ -1,3 +1,7 @@
 tactics_opleidingsbudget_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: TacticsOpleidingsbudgetBundle:Default:index }
+
+tactics_home:
+  pattern: /
+  defaults: { _controller: TacticsOpleidingsbudgetBundle:Default:index }

@@ -5,3 +5,10 @@ services:
 #    tactics_opleidingsbudget.example:
 #        class: %tactics_opleidingsbudget.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+
+    tactics_user.registration.form.type:
+        class: Tactics\OpleidingsbudgetBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: registration_name }
+            - { name: form.type, alias: registration_first_name }

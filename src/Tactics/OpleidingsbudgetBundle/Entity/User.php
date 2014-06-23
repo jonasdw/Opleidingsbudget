@@ -12,6 +12,7 @@ use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 
+
 class User extends BaseUser
 {
 
@@ -39,6 +40,17 @@ class User extends BaseUser
     }
     public function setName($name){
         $this->name = $name;
+    }
+
+
+    //Username is required, override function --> username == email | keep FOS happy
+    public function setEmail($email){
+        parent::setUsername($email);
+        parent::setEmail($email);
+    }
+    public function setEmailCanonical($emailCanonical){
+        parent::setUsername($emailCanonical);
+        parent::setEmailCanonical($emailCanonical);
     }
 
 

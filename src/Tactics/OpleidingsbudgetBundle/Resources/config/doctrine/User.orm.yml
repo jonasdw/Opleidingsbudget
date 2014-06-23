@@ -16,6 +16,9 @@ Tactics\OpleidingsbudgetBundle\Entity\User:
         first_name:
             type: text
             length: 255
+            nullable: true
+
         name:
             type: text
             length: 255
+            nullable: true

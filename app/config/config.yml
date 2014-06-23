@@ -73,3 +73,7 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Tactics\OpleidingsbudgetBundle\Entity\User
+    registration:
+        form:
+            type: registration_name
+            type: registration_first_name
