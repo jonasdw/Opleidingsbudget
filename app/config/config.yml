@@ -75,5 +75,8 @@ fos_user:
     user_class: Tactics\OpleidingsbudgetBundle\Entity\User
     registration:
         form:
-            type: registration_name
-            type: registration_first_name
+            type: registration
+    profile:
+        form:
+            type: alter_users
+

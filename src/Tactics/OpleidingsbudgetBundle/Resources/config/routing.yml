@@ -1,7 +1,12 @@
-tactics_opleidingsbudget_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: TacticsOpleidingsbudgetBundle:Default:index }
-
 tactics_home:
   pattern: /
   defaults: { _controller: TacticsOpleidingsbudgetBundle:Default:index }
+
+
+user_list:
+  pattern: /user/list
+  defaults: { _controller: TacticsOpleidingsbudgetBundle:User:users }
+
+tactics_edit_user:
+  pattern: /profile/edit/{username}
+  defaults: { _controller: TacticsOpleidingsbudgetBundle:Profile:edit }

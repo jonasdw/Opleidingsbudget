@@ -21,8 +21,8 @@ class RegistrationFormType extends BaseType
                 ->remove('username')
                 ->add('email', 'email', array('label' => 'email', 'translation_domain' => 'FOSUserBundle'))
                 ->remove('plainPassword')
+                ->add('first_name', 'text', array('label' => 'first name', 'translation_domain' => 'FOSUserBundle'))
                 ->add('name', 'text', array('label' => 'last name', 'translation_domain' => 'FOSUserBundle'))
-                ->add('firstname', 'text', array('label' => 'first name', 'translation_domain' => 'FOSUserBundle'))
                 ->add('plainPassword', 'repeated', array(
                     'type' => 'password',
                     'options' => array('translation_domain' => 'FOSUserBundle'),
@@ -35,10 +35,6 @@ class RegistrationFormType extends BaseType
     }
     public function getName()
     {
-        return 'registration_name';
-    }
-    public function getFirstName()
-    {
-        return 'registration_first_name';
+        return 'registration';
     }
 }

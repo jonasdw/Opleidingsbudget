@@ -1,7 +1,6 @@
 tactics_opleidingsbudget:
     resource: "@TacticsOpleidingsbudgetBundle/Resources/config/routing.yml"
-    prefix:   /permission
-    defaults: { _controller: TacticsOpleidingsbudgetBundle:User:index }
+    prefix:   /
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

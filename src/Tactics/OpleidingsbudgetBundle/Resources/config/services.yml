@@ -10,5 +10,11 @@ services:
         class: Tactics\OpleidingsbudgetBundle\Form\Type\RegistrationFormType
         arguments: [%fos_user.model.user.class%]
         tags:
-            - { name: form.type, alias: registration_name }
-            - { name: form.type, alias: registration_first_name }
+            - { name: form.type, alias: registration }
+
+    tactics_user.alter_users.form.type:
+            class: Tactics\OpleidingsbudgetBundle\Form\Type\ProfileFormType
+            arguments: [%fos_user.model.user.class%]
+            tags:
+                - { name: form.type, alias: alter_users }
+
