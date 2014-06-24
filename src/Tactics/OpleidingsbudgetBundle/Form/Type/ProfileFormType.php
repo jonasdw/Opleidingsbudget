@@ -33,7 +33,7 @@ class ProfileFormType extends BaseType
                 'multiple'  => true,
                 'expanded' => true,
             ))
-            ->add('enabled', 'checkbox', array('label' => 'enabled', 'required' => false));
+            ->add('expired', 'checkbox', array('label' => 'expired', 'required' => false));
 
     }
 

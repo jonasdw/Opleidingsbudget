@@ -1,0 +1,30 @@
+transaction:
+    pattern:  /
+    defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:index" }
+
+transaction_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:show" }
+
+transaction_new:
+    pattern:  /new
+    defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:new" }
+
+transaction_create:
+    pattern:  /create
+    defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:create" }
+    requirements: { _method: post }
+
+transaction_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:edit" }
+
+transaction_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:update" }
+    requirements: { _method: post|put }
+
+transaction_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:delete" }
+    requirements: { _method: post|delete }

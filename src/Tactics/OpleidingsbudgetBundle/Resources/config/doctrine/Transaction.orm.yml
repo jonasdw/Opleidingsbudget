@@ -1,0 +1,39 @@
+Tactics\OpleidingsbudgetBundle\Entity\Transaction:
+    type: entity
+    table: transaction
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+
+    fields:
+        amount:
+            type: decimal(6,2)
+            nullable: false
+
+        type:
+            type: text
+            length: 255
+            nullable: false
+
+        date:
+            type: date
+            nullable: true
+
+        expenserequest_id:
+            type: integer
+            nullable: true
+
+        user_id:
+            type: integer
+            nullable: false
+    ManyToOne:
+        user:
+            targetEntity: User
+        expenserequest:
+            targetEntity: ExpenseRequest

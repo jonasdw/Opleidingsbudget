@@ -1,0 +1,30 @@
+expenserequest:
+    pattern:  /
+    defaults: { _controller: "TacticsOpleidingsbudgetBundle:ExpenseRequest:index" }
+
+expenserequest_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "TacticsOpleidingsbudgetBundle:ExpenseRequest:show" }
+
+expenserequest_new:
+    pattern:  /new
+    defaults: { _controller: "TacticsOpleidingsbudgetBundle:ExpenseRequest:new" }
+
+expenserequest_create:
+    pattern:  /create
+    defaults: { _controller: "TacticsOpleidingsbudgetBundle:ExpenseRequest:create" }
+    requirements: { _method: post }
+
+expenserequest_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "TacticsOpleidingsbudgetBundle:ExpenseRequest:edit" }
+
+expenserequest_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "TacticsOpleidingsbudgetBundle:ExpenseRequest:update" }
+    requirements: { _method: post|put }
+
+expenserequest_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "TacticsOpleidingsbudgetBundle:ExpenseRequest:delete" }
+    requirements: { _method: post|delete }

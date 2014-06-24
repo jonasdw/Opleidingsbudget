@@ -10,7 +10,8 @@
 
 
  use Symfony\Bundle\FrameworkBundle\Controller\Controller;
- use Symfony\Component\Security\Core\SecurityContext;;
+ use Symfony\Component\Security\Core\SecurityContext;
+ use Symfony\Component\HttpFoundation\Response;
 
 
  class UserController extends Controller
@@ -18,24 +19,27 @@
 
      public function indexAction()
      {
-
-
-         //$user = $this->getUser();
-         //$securityContext = $this->securityContext;
-         var_dump($this->getUser());
+         $userManager = $this->get('fos_user.user_manager');
 
          if ($this->get('security.context')->isGranted('ROLE_APPROVER')) {
-             echo("hier mag gert binnen");
+             //return new RedirectResponse("user/list");
+             $users = $userManager->findUsers();
+
+             return $this->render('TacticsOpleidingsbudgetBundle::users.html.twig', array('users' =>   $users));
          }
          if ($this->get('security.context')->isGranted('ROLE_APPROVER') || $this->get('security.context')->isGranted('ROLE_EXECUTOR') ){
-             echo("      hier kathleen");
+             $userManager = $this->get('fos_user.user_manager');
+             $users = $userManager->findUsers();
+
+             return $this->render('TacticsOpleidingsbudgetBundle::users.html.twig', array('users' =>   $users));
          }
          if ($this->get('security.context')->isGranted('ROLE_APPROVER') || $this->get('security.context')->isGranted('ROLE_EXECUTOR') || $this->get('security.context')->isGranted('ROLE_USER'))
          {
-             echo('       test');
+             $user = $this->container->get('security.context')->getToken()->getUser();
+             return $this->render('TacticsOpleidingsbudgetBundle::profile.html.twig', array('user' => $user));
          }
-         die();
-         return null;
+
+         return new Response('Gelieve in te loggen!');
      }
 
      public function usersAction() {

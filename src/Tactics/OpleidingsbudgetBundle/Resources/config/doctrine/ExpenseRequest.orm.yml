@@ -1,0 +1,46 @@
+Tactics\OpleidingsbudgetBundle\Entity\ExpenseRequest:
+    type: entity
+    table: expenserequest
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+
+    fields:
+        amount:
+            type: decimal(6,2)
+            nullable: false
+
+        description:
+            type: text
+            length: 255
+            nullable: false
+
+        status:
+            type: text
+            length: 255
+            nullable: false
+
+        date_pending:
+            type: date
+            nullable: true
+
+        date_approved:
+            type: date
+            nullable: true
+
+        date_executed:
+            type: date
+            nullable: true
+
+        user_id:
+            type: integer
+            nullable: false
+    ManyToOne:
+        user:
+            targetEntity: User
