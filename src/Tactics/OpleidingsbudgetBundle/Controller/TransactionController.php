@@ -23,10 +23,21 @@ class TransactionController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findAll();
+        //GET CURRENT USER
+        $user = $this->get('security.context')->getToken()->getUser();
+
+        //GET ALL TRANSACTIONS
+        //$entities = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findAll();
+
+        //GET TRANSACTIONS PER current USER | sort by date
+        $entities = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findBy(
+            array('user_id' => $user->getId()),
+            array('date' => 'ASC')
+        );
 
         return $this->render('TacticsOpleidingsbudgetBundle:Transaction:index.html.twig', array(
             'entities' => $entities,
+            'user' => $user
         ));
     }
     /**
