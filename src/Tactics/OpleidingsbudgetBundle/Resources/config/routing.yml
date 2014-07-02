@@ -3,7 +3,7 @@ tactics_home:
   defaults: { _controller: TacticsOpleidingsbudgetBundle:Default:index }
 
 user_check:
-  pattern: /check/roles
+  pattern: /roles
   defaults: { _controller: TacticsOpleidingsbudgetBundle:User:index }
 
 user_list:

@@ -11,7 +11,7 @@
 
  use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  use Symfony\Component\Security\Core\SecurityContext;
- use Symfony\Component\HttpFoundation\Response;
+ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
  class UserController extends Controller
@@ -35,8 +35,9 @@
          }
          if ($this->get('security.context')->isGranted('ROLE_APPROVER') || $this->get('security.context')->isGranted('ROLE_EXECUTOR') || $this->get('security.context')->isGranted('ROLE_USER'))
          {
-             $user = $this->container->get('security.context')->getToken()->getUser();
-             return $this->render('TacticsOpleidingsbudgetBundle::profile.html.twig', array('user' => $user));
+             /*$user = $this->container->get('security.context')->getToken()->getUser();
+             return $this->render('TacticsOpleidingsbudgetBundle::profile.html.twig', array('user' => $user));*/
+             return new RedirectResponse("transaction");
          }
 
          return new Response('Gelieve in te loggen!');
