@@ -1,53 +1,41 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>ExpenseRequest list</h1>
+    <h2>ExpenseRequest list for: {{ user.firstname }}</h2>
 
     <table class="records_list">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Amount</th>
+                <th>Datum aangevraagd</th>
+                <th>Datum goedgekeurd</th>
+                <th>Datum uitgevoerd</th>
+
+                <th>Bedrag</th>
                 <th>Description</th>
-                <th>Status</th>
-                <th>Date_pending</th>
-                <th>Date_approved</th>
-                <th>Date_executed</th>
-                <th>User_id</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('expenserequest_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <tr class="{{ entity.status }}">
+                <td>{% if entity.datepending %}{{ entity.datepending|date('d-m-Y') }}{% endif %}</td>
+                <td>{% if entity.dateapproved %}{{ entity.dateapproved|date('d-m-Y') }}{% else %}afwachten{% endif %}</td>
+                <td>{% if entity.dateexecuted %}{{ entity.dateexecuted|date('d-m-Y') }}{% else %}afwachten{% endif %}</td>
+
                 <td>{{ entity.amount }}</td>
                 <td>{{ entity.description }}</td>
-                <td>{{ entity.status }}</td>
-                <td>{% if entity.datepending %}{{ entity.datepending|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.dateapproved %}{{ entity.dateapproved|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.dateexecuted %}{{ entity.dateexecuted|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.userid }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('expenserequest_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('expenserequest_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
+
+                <td><a href="{{ path('expenserequest_show', { 'id': entity.id }) }}">meer info</a></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
+<!--
         <ul>
-        <li>
-            <a href="{{ path('expenserequest_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
+            <li>
+                <a href="{{ path('expenserequest_new') }}">
+                    Create a new entry
+                </a>
+            </li>
+        </ul>
+-->
     {% endblock %}

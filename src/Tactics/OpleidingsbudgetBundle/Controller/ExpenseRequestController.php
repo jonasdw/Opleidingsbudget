@@ -23,10 +23,21 @@ class ExpenseRequestController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->findAll();
+        //GET CURRENT USER
+        $user = $this->get('security.context')->getToken()->getUser();
+
+        //GET ALL TRANSACTIONS
+        //$entities = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->findAll();
+
+        //GET TRANSACTIONS PER current USER | sort by date
+        $entities = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->findBy(
+            array('user_id' => $user->getId()),
+            array('date_pending' => 'ASC')
+        );
 
         return $this->render('TacticsOpleidingsbudgetBundle:ExpenseRequest:index.html.twig', array(
             'entities' => $entities,
+            'user' => $user
         ));
     }
     /**
