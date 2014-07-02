@@ -93,6 +93,8 @@ class ExpenseRequestController extends Controller
      */
     public function showAction($id)
     {
+        $user = $this->get('security.context')->getToken()->getUser();
+
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->find($id);
@@ -100,6 +102,13 @@ class ExpenseRequestController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find ExpenseRequest entity.');
         }
+
+        //EXTRA BUFFER CHECK CURRENT USER vs REQUESTED EXPENSE USER ID
+        //WHAT ABOUT EXECUTOR AND APPROVER?!
+        if (!$this->get('security.context')->isGranted('ROLE_APPROVER') || !$this->get('security.context')->isGranted('ROLE_APPROVER')) {
+        if ($entity->getUserId() != $user->getId() ){
+            throw $this->createNotFoundException('This is not your expense!');
+        }}
 
         $deleteForm = $this->createDeleteForm($id);
 
