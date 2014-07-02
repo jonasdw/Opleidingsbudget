@@ -17,11 +17,11 @@ class ExpenseRequestType extends AbstractType
         $builder
             ->add('amount')
             ->add('description')
-            ->add('status')
-            ->add('date_pending')
-            ->add('date_approved')
-            ->add('date_executed')
-            ->add('user_id')
+//            ->add('status')
+//            ->add('date_pending')
+//            ->add('date_approved')
+//            ->add('date_executed')
+//            ->add('user_id')
         ;
     }
     

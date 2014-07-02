@@ -3,6 +3,10 @@
 {% block body -%}
     <h2>Transaction list for: {{ user.firstname }}</h2>
 
+    <a href="{{ path('expenserequest_new') }}">
+        Nieuwe aanvraag
+    </a>
+    <br /><br />
     <table class="records_list">
         <thead>
             <tr>
@@ -26,13 +30,6 @@
         {% endfor %}
         </tbody>
     </table>
-<!--
-    <ul>
-        <li>
-            <a href="{{ path('transaction_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
--->
+
+
     {% endblock %}

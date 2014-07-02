@@ -5,10 +5,15 @@
 
     {{ form(form) }}
 
-        <ul class="record_actions">
+<ul class="record_actions">
     <li>
         <a href="{{ path('expenserequest') }}">
-            Back to the list
+            Back to all requests
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('transaction') }}">
+            Back to transactions
         </a>
     </li>
 </ul>

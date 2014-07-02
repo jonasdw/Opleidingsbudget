@@ -50,6 +50,12 @@ class ExpenseRequest
      */
     private $user_id;
 
+    public function __construct(User $user)
+    {
+        $this->date_pending = new \DateTime();
+        $this->status = "pending";
+        $this->user_id = $user->getId();
+    }
 
     /**
      * Get id
@@ -197,19 +203,6 @@ class ExpenseRequest
     public function getDateExecuted()
     {
         return $this->date_executed;
-    }
-
-    /**
-     * Set user_id
-     *
-     * @param integer $userId
-     * @return ExpenseRequest
-     */
-    public function setUserId($userId)
-    {
-        $this->user_id = $userId;
-
-        return $this;
     }
 
     /**

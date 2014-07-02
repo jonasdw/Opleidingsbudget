@@ -89,7 +89,10 @@ class ExpenseRequestController extends Controller
      */
     public function newAction()
     {
-        $entity = new ExpenseRequest();
+        $user = $this->get('security.context')->getToken()->getUser();
+
+        $entity = new ExpenseRequest($user);
+
         $form   = $this->createCreateForm($entity);
 
         return $this->render('TacticsOpleidingsbudgetBundle:ExpenseRequest:new.html.twig', array(
