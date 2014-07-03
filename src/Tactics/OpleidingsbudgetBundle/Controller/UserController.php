@@ -33,14 +33,8 @@
 
              return $this->render('TacticsOpleidingsbudgetBundle::users.html.twig', array('users' =>   $users));
          }
-         if ($this->get('security.context')->isGranted('ROLE_APPROVER') || $this->get('security.context')->isGranted('ROLE_EXECUTOR') || $this->get('security.context')->isGranted('ROLE_USER'))
-         {
-             /*$user = $this->container->get('security.context')->getToken()->getUser();
-             return $this->render('TacticsOpleidingsbudgetBundle::profile.html.twig', array('user' => $user));*/
-             return new RedirectResponse("transaction");
-         }
 
-         return new Response('Gelieve in te loggen!');
+         return new RedirectResponse($this->generateUrl('transaction'));
      }
 
      public function usersAction() {

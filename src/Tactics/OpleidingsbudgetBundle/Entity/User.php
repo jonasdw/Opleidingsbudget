@@ -22,13 +22,15 @@ class User extends BaseUser
 
     private $name;
 
+    protected $enabled;
+
     //protected $roles;
 
     public function __construct()
     {
         parent::__construct();
-        // your own logic
-        //$this->$roles = array("ROLE_USER", "ROLE_EXECUTOR", "ROLE_APPROVER");
+        //USER is disabled
+        $this->enabled = false;
 
     }
 

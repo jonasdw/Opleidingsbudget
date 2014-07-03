@@ -2,8 +2,8 @@
 
 {% block body %}
 {% for user in users %}
-    {% if user.isExpired %}
-        <a href="{{ path('tactics_edit_user', { 'username': user.username }) }}">{{ user.username|e }} </a> | expired<br />
+    {% if not user.isEnabled %}
+        <a href="{{ path('tactics_edit_user', { 'username': user.username }) }}">{{ user.username|e }} </a> | disabled<br />
     {#{% for role in user.roles %}
         {{ role|slice(5) }}
         <input type="checkbox" checked="checked" value="role" placeholder="" name="user.username">

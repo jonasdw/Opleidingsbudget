@@ -15,9 +15,10 @@ use Symfony\component\Form\FormEvent;
 
 class ProfileFormType extends BaseType
 {
-    protected function buildUserForm(FormBuilderInterface $builder, array $options)
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildUserForm($builder, $options);
+        parent::buildForm($builder, $options);
         //$builder
         $builder
             ->remove('username')
@@ -33,8 +34,8 @@ class ProfileFormType extends BaseType
                 'multiple'  => true,
                 'expanded' => true,
             ))
-            ->add('expired', 'checkbox', array('label' => 'expired', 'required' => false));
-
+            ->add('enabled', 'checkbox', array('label' => 'enabled', 'required' => false))
+            ->remove('current_password', 'password');
     }
 
 

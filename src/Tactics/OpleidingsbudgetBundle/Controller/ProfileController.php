@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
 
@@ -39,7 +40,7 @@ class ProfileController extends Controller
 
                 //return new RedirectResponse($this->getRedirectionUrl($user));
                 //return $this->redirect($this->generateUrl('/user/list'));
-                return new Response("Updated!");
+                return new RedirectResponse($this->generateUrl('user_check'));
             }
 
             return $this->container->get('templating')->renderResponse(
@@ -48,8 +49,8 @@ class ProfileController extends Controller
             );
 
         }else{
-            echo("no acces for this user!");
-            die();
+            //IF EXECUTOR or APPROVER -> show transaction page!
+            return new RedirectResponse($this->generateUrl('user_check'));
         }
 
 
