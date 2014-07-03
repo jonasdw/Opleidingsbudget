@@ -46,7 +46,9 @@ class ExpenseRequestController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new ExpenseRequest();
+        $user = $this->get('security.context')->getToken()->getUser();
+
+        $entity = new ExpenseRequest($user);
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
