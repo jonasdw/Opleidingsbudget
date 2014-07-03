@@ -23,13 +23,14 @@ class ProfileController extends Controller
     public function editAction($username)
     {
         $userManager = $this->get('fos_user.user_manager');
+        $userLogged = $this->container->get('security.context')->getToken()->getUser();
         $user = $userManager->findUserByUsername($username);
-
+     
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
-        if ($this->get('security.context')->isGranted('ROLE_APPROVER')) {
+        if ($this->get('security.context')->isGranted('ROLE_APPROVER') || $userLogged->getUserName() == $username) {
             $form = $this->container->get('fos_user.profile.form');
 
             $formHandler = $this->container->get('fos_user.profile.form.handler');
