@@ -1,5 +1,6 @@
 Tactics\OpleidingsbudgetBundle\Entity\User:
     type: entity
+    repositoryClass: Tactics\OpleidingsbudgetBundle\Repository\UserRepository
     table: user
     id:
         id:

@@ -31,7 +31,6 @@ class User extends BaseUser
         parent::__construct();
         //USER is disabled
         $this->enabled = false;
-
     }
 
     public function getFirstName(){
