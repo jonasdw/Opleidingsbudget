@@ -102,6 +102,17 @@ class RegistrationController extends Controller {
     {
         $user = $this->container->get('security.context')->getToken()->getUser();
 
+        $em = $this->getDoctrine()->getManager();
+
+        $approvers = $em->getRepository('TacticsOpleidingsbudgetBundle:User')->getApprovers();
+
+        $emails = array_map(function($approver) { return $approver->getEmail(); }, $approvers);
+        $subject = $user->getFirstName().' registered';
+        $body = $user->getFirstName() . " ". $user->getName() . " has registered.
+            Don't forget to activate this user.";
+
+        $this->get('opleidingsbudget_mailer')->sendMail($subject, $emails, $body);
+
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
