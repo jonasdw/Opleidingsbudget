@@ -114,6 +114,20 @@ class TransactionController extends Controller
         ));
     }
 
+    public function newExpenseAction($usrid, $expreid)
+    {
+        $entity = new Transaction();
+        $entity->setType('expense');
+        $entity->setUserId($usrid);
+        $entity->setExpenserequestId($expreid);
+        $form   = $this->createCreateForm($entity);
+
+        return $this->render('TacticsOpleidingsbudgetBundle:Transaction:new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+    }
+
     /**
      * Finds and displays a Transaction entity.
      *

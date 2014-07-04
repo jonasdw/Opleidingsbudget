@@ -14,6 +14,10 @@ transaction_new_endofyear:
     pattern:  /new/{usrid}/endofyear
     defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:newEndofYear" }
 
+transaction_new_expense:
+    pattern:  /new/{usrid}/{expreid}/expense
+    defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:newExpense" }
+
 transaction_create:
     pattern:  /create
     defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:create" }
