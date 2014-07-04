@@ -21,7 +21,7 @@
                 <td>{% if entity.dateapproved %}{{ entity.dateapproved|date('d-m-Y') }}{% else %}afwachten{% endif %}</td>
                 <td>{% if entity.dateexecuted %}{{ entity.dateexecuted|date('d-m-Y') }}{% else %}afwachten{% endif %}</td>
 
-                <td>{{ entity.amount }}</td>
+                <td>{{ entity.amount * -1 }}</td>
                 <td>{{ entity.description }}</td>
 
                 <td><a href="{{ path('expenserequest_show', { 'id': entity.id }) }}">meer info</a></td>
