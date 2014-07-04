@@ -14,15 +14,28 @@
                 {{ 'logout'|trans({}, 'FOSUserBundle') }}
             </a><br/>
             <a href="{{ path('tactics_edit_user', { 'username': app.user.username }) }}">edit profile</a>
-        {% endif %}<br/><br/>
-        {% block menu %}
-            <a href="{{ path('transaction') }}">
-                Transactions
-            </a>
-            <a href="{{ path('expenserequest') }}">
-                Requests
-            </a>
-        {% endblock %}
+            <br /><br />
+            {% block menu %}
+                {% if is_granted("ROLE_APPROVER") %}
+                    <a href="{{ path('home') }}">home</a>
+                    <a href="{{ path('transaction_all') }}">
+                        Transactions
+                    </a>
+                    <a href="{{ path('expenserequest') }}">
+                        Requests
+                    </a>
+                {% elseif is_granted("ROLE_USER") %}
+                <a href="{{ path('transaction') }}">
+                    Transactions
+                </a>
+                <a href="{{ path('expenserequest') }}">
+                    Requests
+                </a>
+                {% endif %}
+            {% endblock %}
+            <br /><br />
+        {% endif %}
+
 
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
