@@ -6,9 +6,13 @@ transaction_show:
     pattern:  /{id}/show
     defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:show" }
 
-transaction_new:
-    pattern:  /new
-    defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:new" }
+transaction_new_budget:
+    pattern:  /new/{usrid}/budget
+    defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:newBudget" }
+
+transaction_new_endofyear:
+    pattern:  /new/{usrid}/endofyear
+    defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:newEndofYear" }
 
 transaction_create:
     pattern:  /create

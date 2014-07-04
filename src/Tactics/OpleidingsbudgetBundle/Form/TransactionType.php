@@ -5,6 +5,8 @@ namespace Tactics\OpleidingsbudgetBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeToStringTransformer;
+
 
 class TransactionType extends AbstractType
 {
@@ -16,10 +18,10 @@ class TransactionType extends AbstractType
     {
         $builder
             ->add('amount')
-            ->add('type')
+            ->add('type', 'hidden')
             ->add('date')
-            ->add('expenserequest_id', null)
-            ->add('user_id')
+            ->add('expenserequest_id', 'hidden')
+            ->add('user_id', 'hidden')
         ;
     }
     

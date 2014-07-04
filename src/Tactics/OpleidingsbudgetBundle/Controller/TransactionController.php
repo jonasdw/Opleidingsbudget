@@ -95,9 +95,24 @@ class TransactionController extends Controller
      * Displays a form to create a new Transaction entity.
      *
      */
-    public function newAction()
+    public function newBudgetAction($usrid)
     {
         $entity = new Transaction();
+        $entity->setType('budget');
+        $entity->setUserId($usrid);
+        $form   = $this->createCreateForm($entity);
+
+        return $this->render('TacticsOpleidingsbudgetBundle:Transaction:new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+    }
+
+    public function newEndofYearAction($usrid)
+    {
+        $entity = new Transaction();
+        $entity->setType('endofyear');
+        $entity->setUserId($usrid);
         $form   = $this->createCreateForm($entity);
 
         return $this->render('TacticsOpleidingsbudgetBundle:Transaction:new.html.twig', array(
