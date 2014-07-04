@@ -52,14 +52,7 @@ class TransactionController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-
-            $type = $entity->getType();
-
-            if ($type == 'expense' || $type == 'endofyear')
-            {
-                $entity->setAmount(-1 * abs($entity->getAmount()));
-            }
-
+            $entity->handleAmount();
             $em->persist($entity);
             $em->flush();
 

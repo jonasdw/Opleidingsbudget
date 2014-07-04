@@ -169,4 +169,13 @@ class Transaction
     {
         return $this->user_id;
     }
+
+    public function handleAmount()
+    {
+        if ($this->type == 'expense' || $this->type == 'endofyear')
+        {
+            $this->amount = -1 * abs($this->amount);
+        }
+    }
+
 }
