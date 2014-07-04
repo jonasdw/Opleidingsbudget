@@ -1,16 +1,18 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h2>ExpenseRequest list for: {{ user.firstname }}</h2>
-
+{% block body %}
+    <h2>Requests | current budget:</h2>
+    <a href="{{ path('expenserequest_new') }}">
+        Make Request
+    </a>
     <table class="records_list">
         <thead>
             <tr>
-                <th>Datum aangevraagd</th>
-                <th>Datum goedgekeurd</th>
-                <th>Datum uitgevoerd</th>
+                <th>Requested at</th>
+                <th>Approved at</th>
+                <th>Executed at</th>
 
-                <th>Bedrag</th>
+                <th>Amount</th>
                 <th>Description</th>
             </tr>
         </thead>
@@ -18,8 +20,8 @@
         {% for entity in entities %}
             <tr class="{{ entity.status }}">
                 <td>{% if entity.datepending %}{{ entity.datepending|date('d-m-Y') }}{% endif %}</td>
-                <td>{% if entity.dateapproved %}{{ entity.dateapproved|date('d-m-Y') }}{% else %}afwachten{% endif %}</td>
-                <td>{% if entity.dateexecuted %}{{ entity.dateexecuted|date('d-m-Y') }}{% else %}afwachten{% endif %}</td>
+                <td>{% if entity.dateapproved %}{{ entity.dateapproved|date('d-m-Y') }}{% else %}x{% endif %}</td>
+                <td>{% if entity.dateexecuted %}{{ entity.dateexecuted|date('d-m-Y') }}{% else %}x{% endif %}</td>
 
                 <td>{{ entity.amount * -1 }}</td>
                 <td>{{ entity.description }}</td>

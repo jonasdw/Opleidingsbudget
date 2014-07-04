@@ -1,10 +1,10 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h2>Transaction list for: {{ user.firstname }}</h2>
+{% block body %}
+    <h2>Transactions | current budget: </h2>
 
     <a href="{{ path('expenserequest_new') }}">
-        Nieuwe aanvraag
+        Make Request
     </a>
     <br /><br />
     <table class="records_list">

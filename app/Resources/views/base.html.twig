@@ -7,13 +7,23 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        <h1>Opleidingsbudget App</h1>
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <h4>Oi {{ app.user.firstname }},</h4>
             <a href="{{ path('fos_user_security_logout') }}">
                 {{ 'logout'|trans({}, 'FOSUserBundle') }}
+            </a><br/>
+            <a href="{{ path('tactics_edit_user', { 'username': app.user.username }) }}">edit profile</a>
+        {% endif %}<br/><br/>
+        {% block menu %}
+            <a href="{{ path('transaction') }}">
+                Transactions
             </a>
-        {% endif %}
-        {% block header %}{% endblock %}
-        <h1>Opleidingsbudget App</h1>
+            <a href="{{ path('expenserequest') }}">
+                Requests
+            </a>
+        {% endblock %}
+
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
