@@ -41,7 +41,7 @@ class ProfileController extends Controller
 
                 //return new RedirectResponse($this->getRedirectionUrl($user));
                 //return $this->redirect($this->generateUrl('/user/list'));
-                return new RedirectResponse($this->generateUrl('user_check'));
+                return new RedirectResponse($this->generateUrl('home'));
             }
 
             return $this->container->get('templating')->renderResponse(
