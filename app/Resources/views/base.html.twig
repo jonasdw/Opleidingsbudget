@@ -2,11 +2,17 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}ob app{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+        {% endif %}
+        {% block header %}{% endblock %}
         <h1>Opleidingsbudget App</h1>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
