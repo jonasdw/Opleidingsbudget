@@ -50,8 +50,8 @@ class ProfileController extends Controller
             );
 
         }else{
-            //IF EXECUTOR or APPROVER -> show transaction page!
-            return new RedirectResponse($this->generateUrl('user_check'));
+            //IF EXECUTOR or USER -> show transaction page!
+            return new RedirectResponse($this->generateUrl('home'));
         }
 
 
