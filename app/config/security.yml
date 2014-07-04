@@ -11,31 +11,23 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        login_firewall:
-            pattern: ^/login$
-            anonymous: true
-
         main:
-            pattern: ^/
-            form_login:
-                provider:       fos_userbundle
-                csrf_provider:  form.csrf_provider
-#                login_path:     /login
-#                use_forward:    true
-#                check_path:     /login_check
-#                failure_path:   null
-                always_use_default_target_path: false
-                default_target_path:  /roles
-            logout:     true
-            anonymous:  true
+          pattern: ^/
+          form_login:
+            provider:       fos_userbundle
+            csrf_provider:  form.csrf_provider
+            default_target_path:  /
+          logout:     true
+          anonymous:  true
+
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/transaction/new, role: ROLE_EXECUTOR }
         - { path: ^/, role: ROLE_USER }
 
     role_hierarchy:
-        EXECUTER:         USER
-        APPROVER:         EXECUTOR
-
+        ROLE_EXECUTER:         ROLE_USER
+        ROLE_APPROVER:         ROLE_EXECUTOR
