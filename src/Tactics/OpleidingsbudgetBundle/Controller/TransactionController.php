@@ -40,6 +40,24 @@ class TransactionController extends Controller
             'user' => $user
         ));
     }
+    public function allAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        //GET ALL TRANSACTIONS
+        $entities = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findAll(
+            array('date' => 'ASC')
+        );
+
+        //GET TRANSACTIONS PER current USER | sort by date
+       // $entities = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findBy(
+         //   array('date' => 'ASC')
+        //);
+
+        return $this->render('TacticsOpleidingsbudgetBundle:Transaction:all.html.twig', array(
+            'entities' => $entities
+        ));
+    }
     /**
      * Creates a new Transaction entity.
      *

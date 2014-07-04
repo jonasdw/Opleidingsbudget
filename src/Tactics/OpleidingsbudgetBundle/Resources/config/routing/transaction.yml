@@ -2,6 +2,10 @@ transaction:
     pattern:  /
     defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:index" }
 
+transaction_all:
+    pattern: /all
+    defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:all" }
+
 transaction_show:
     pattern:  /{id}/show
     defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:show" }
