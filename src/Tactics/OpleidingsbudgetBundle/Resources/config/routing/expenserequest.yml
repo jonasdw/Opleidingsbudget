@@ -2,6 +2,10 @@ expenserequest:
     pattern:  /
     defaults: { _controller: "TacticsOpleidingsbudgetBundle:ExpenseRequest:index" }
 
+expenserequest_all:
+    pattern: /all
+    defaults: { _controller: "TacticsOpleidingsbudgetBundle:ExpenseRequest:all" }
+
 expenserequest_show:
     pattern:  /{id}/show
     defaults: { _controller: "TacticsOpleidingsbudgetBundle:ExpenseRequest:show" }

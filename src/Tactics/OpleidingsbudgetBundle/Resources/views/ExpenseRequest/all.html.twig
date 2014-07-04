@@ -1,0 +1,42 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h2>Requests</h2>
+    <table class="records_list">
+        <thead>
+        <tr>
+            <th>Requested at</th>
+            <th>Approved at</th>
+            <th>Executed at</th>
+
+            <th>Amount</th>
+            <th>Description</th>
+            <th>User</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr class="{{ entity.status }}">
+                <td>{% if entity.datepending %}{{ entity.datepending|date('d-m-Y') }}{% endif %}</td>
+                <td>{% if entity.dateapproved %}{{ entity.dateapproved|date('d-m-Y') }}{% else %}x{% endif %}</td>
+                <td>{% if entity.dateexecuted %}{{ entity.dateexecuted|date('d-m-Y') }}{% else %}x{% endif %}</td>
+
+                <td>{{ entity.amount * -1 }}</td>
+                <td>{{ entity.description }}</td>
+                <td>{{ entity.userid }}</td>
+                <td><a href="{{ path('expenserequest_show', { 'id': entity.id }) }}">meer info</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <!--
+        <ul>
+            <li>
+                <a href="{{ path('expenserequest_new') }}">
+                    Create a new entry
+                </a>
+            </li>
+        </ul>
+-->
+{% endblock %}

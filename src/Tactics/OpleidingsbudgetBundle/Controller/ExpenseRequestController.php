@@ -40,6 +40,18 @@ class ExpenseRequestController extends Controller
             'user' => $user
         ));
     }
+
+    public function allAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        //GET ALL TRANSACTIONS
+        $entities = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->findAll();
+
+        return $this->render('TacticsOpleidingsbudgetBundle:ExpenseRequest:all.html.twig', array(
+            'entities' => $entities
+        ));
+    }
     /**
      * Creates a new ExpenseRequest entity.
      *
