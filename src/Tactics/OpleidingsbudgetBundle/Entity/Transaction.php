@@ -39,6 +39,11 @@ class Transaction
      */
     private $user_id;
 
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
+
 
     /**
      * Get id
