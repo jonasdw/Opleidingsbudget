@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <h2>Requests | current budget:</h2>
+    <h2>Requests | current budget: {{ budget }}</h2>
     <a href="{{ path('expenserequest_new') }}">
         Make Request
     </a>

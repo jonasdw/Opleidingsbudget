@@ -1,5 +1,6 @@
 Tactics\OpleidingsbudgetBundle\Entity\Transaction:
     type: entity
+    repositoryClass: Tactics\OpleidingsbudgetBundle\Repository\TransactionRepository
     table: transaction
     id:
         id:

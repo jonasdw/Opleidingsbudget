@@ -29,6 +29,8 @@ class ExpenseRequestController extends Controller
         //GET ALL TRANSACTIONS
         //$entities = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->findAll();
 
+        $budget = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->getUserBudget($user->getId());
+
         //GET TRANSACTIONS PER current USER | sort by date
         $entities = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->findBy(
             array('user_id' => $user->getId()),
@@ -37,7 +39,8 @@ class ExpenseRequestController extends Controller
 
         return $this->render('TacticsOpleidingsbudgetBundle:ExpenseRequest:index.html.twig', array(
             'entities' => $entities,
-            'user' => $user
+            'user' => $user,
+            'budget' => $budget
         ));
     }
 

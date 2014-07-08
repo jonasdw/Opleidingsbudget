@@ -29,6 +29,9 @@ class TransactionController extends Controller
         //GET ALL TRANSACTIONS
         //$entities = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findAll();
 
+        $budget = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->getUserBudget($user->getId());
+
+
         //GET TRANSACTIONS PER current USER | sort by date
         $entities = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findBy(
             array('user_id' => $user->getId()),
@@ -37,7 +40,8 @@ class TransactionController extends Controller
 
         return $this->render('TacticsOpleidingsbudgetBundle:Transaction:index.html.twig', array(
             'entities' => $entities,
-            'user' => $user
+            'user' => $user,
+            'budget' => $budget
         ));
     }
     public function allAction()
