@@ -48,7 +48,7 @@ class Transaction
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -71,7 +71,7 @@ class Transaction
     /**
      * Get amount
      *
-     * @return string 
+     * @return string
      */
     public function getAmount()
     {
@@ -94,7 +94,7 @@ class Transaction
     /**
      * Get type
      *
-     * @return string 
+     * @return string
      */
     public function getType()
     {
@@ -117,7 +117,7 @@ class Transaction
     /**
      * Get date
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -140,7 +140,7 @@ class Transaction
     /**
      * Get expenserequest_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getExpenserequestId()
     {
@@ -163,7 +163,7 @@ class Transaction
     /**
      * Get user_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getUserId()
     {

@@ -60,7 +60,7 @@ class ExpenseRequest
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -83,7 +83,7 @@ class ExpenseRequest
     /**
      * Get amount
      *
-     * @return string 
+     * @return string
      */
     public function getAmount()
     {
@@ -106,7 +106,7 @@ class ExpenseRequest
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -129,7 +129,7 @@ class ExpenseRequest
     /**
      * Get status
      *
-     * @return string 
+     * @return string
      */
     public function getStatus()
     {
@@ -152,7 +152,7 @@ class ExpenseRequest
     /**
      * Get date_pending
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDatePending()
     {
@@ -175,7 +175,7 @@ class ExpenseRequest
     /**
      * Get date_approved
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateApproved()
     {
@@ -198,7 +198,7 @@ class ExpenseRequest
     /**
      * Get date_executed
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateExecuted()
     {
@@ -208,7 +208,7 @@ class ExpenseRequest
     /**
      * Get user_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getUserId()
     {
