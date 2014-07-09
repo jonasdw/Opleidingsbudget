@@ -48,13 +48,13 @@ class ExpenseRequest
     /**
      * @var integer
      */
-    private $user_id;
+    private $user;
 
     public function __construct(User $user)
     {
         $this->date_pending = new \DateTime();
         $this->status = "pending";
-        $this->user_id = $user->getId();
+        $this->user = $user;
     }
 
     /**
@@ -210,8 +210,8 @@ class ExpenseRequest
      *
      * @return integer
      */
-    public function getUserId()
+    public function getUser()
     {
-        return $this->user_id;
+        return $this->user;
     }
 }

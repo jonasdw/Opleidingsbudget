@@ -41,9 +41,6 @@ Tactics\OpleidingsbudgetBundle\Entity\ExpenseRequest:
             type: date
             nullable: true
 
-        user_id:
-            type: integer
-            nullable: false
-    ManyToOne:
+    manyToOne:
         user:
             targetEntity: User

@@ -50,7 +50,8 @@ class ExpenseRequestController extends Controller
 
         //GET ALL TRANSACTIONS
         $entities = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->findAll();
-
+        echo "<pre>";
+        var_dump($entities->getUser()->getFirstname());die();
         return $this->render('TacticsOpleidingsbudgetBundle:ExpenseRequest:all.html.twig', array(
             'entities' => $entities
         ));
@@ -137,7 +138,8 @@ class ExpenseRequestController extends Controller
         //EXTRA BUFFER CHECK CURRENT USER vs REQUESTED EXPENSE USER ID
         //WHAT ABOUT EXECUTOR AND APPROVER?!
         if (!$this->get('security.context')->isGranted('ROLE_APPROVER') || !$this->get('security.context')->isGranted('ROLE_APPROVER')) {
-        if ($entity->getUserId() != $user->getId() ){
+
+        if ($entity->getUser()->getId() != $user->getId() ){
             throw $this->createNotFoundException('This is not your expense!');
         }}
 
