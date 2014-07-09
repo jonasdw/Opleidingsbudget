@@ -23,19 +23,18 @@
             </tr>
             <tr>
                 <th>Date_pending</th>
-                <td>{{ entity.datepending|date('Y-m-d H:i:s') }}</td>
+                <td>{{ entity.datepending|date('Y-m-d') }}</td>
             </tr>
             <tr>
                 <th>Date_approved</th>
-                <td>{{ entity.dateapproved|date('Y-m-d H:i:s') }}</td>
+                <td>{% if entity.dateapproved %}{{ entity.dateapproved|date('d-m-Y') }}{% else %}x{% endif %}</td>
             </tr>
             <tr>
                 <th>Date_executed</th>
-                <td>{{ entity.dateexecuted|date('Y-m-d H:i:s') }}</td>
-            </tr>
+                <td>{% if entity.dateexecuted %}{{ entity.dateexecuted|date('d-m-Y') }}{% else %}x{% endif %}</td>            </tr>
             <tr>
                 <th>User_id</th>
-                <td>{{ entity.userid }}</td>
+                <td>{{ entity.user.firstname }}</td>
             </tr>
         </tbody>
     </table>

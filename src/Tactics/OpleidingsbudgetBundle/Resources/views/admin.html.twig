@@ -21,7 +21,7 @@
                 <td>{{ expenserequest.amount }}</td>
                 <td>{{ expenserequest.description }}</td>
                 <!-- username -->
-                <td>{{ expenserequest.userid }}</td>
+                <td>{{ expenserequest.user.firstname }}</td>
                 <!-- url to set date and status approved
                      or to delete the request! -->
                 <td><a href="{{ path('expenserequest_update_pending', { 'id': expenserequest.id }) }}">approve</a></td>

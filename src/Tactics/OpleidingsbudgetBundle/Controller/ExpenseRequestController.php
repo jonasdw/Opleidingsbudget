@@ -32,10 +32,7 @@ class ExpenseRequestController extends Controller
         $budget = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->getUserBudget($user->getId());
 
         //GET TRANSACTIONS PER current USER | sort by date
-        $entities = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->findBy(
-            array('user_id' => $user->getId()),
-            array('date_pending' => 'ASC')
-        );
+        $entities = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->findByUser($user);
 
         return $this->render('TacticsOpleidingsbudgetBundle:ExpenseRequest:index.html.twig', array(
             'entities' => $entities,
@@ -50,8 +47,7 @@ class ExpenseRequestController extends Controller
 
         //GET ALL TRANSACTIONS
         $entities = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->findAll();
-        echo "<pre>";
-        var_dump($entities->getUser()->getFirstname());die();
+
         return $this->render('TacticsOpleidingsbudgetBundle:ExpenseRequest:all.html.twig', array(
             'entities' => $entities
         ));

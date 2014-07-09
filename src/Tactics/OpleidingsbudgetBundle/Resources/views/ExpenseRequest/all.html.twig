@@ -24,7 +24,7 @@
 
                 <td>{{ entity.amount * -1 }}</td>
                 <td>{{ entity.description }}</td>
-                <td>{{ entity.userid }}</td>
+                <td>{{ entity.user.firstname }}</td>
                 <td><a href="{{ path('expenserequest_show', { 'id': entity.id }) }}">meer info</a></td>
             </tr>
         {% endfor %}
