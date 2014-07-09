@@ -74,7 +74,6 @@ class TransactionController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity->handleAmount();
             $em->persist($entity);
             $em->flush();
 

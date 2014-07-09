@@ -64,8 +64,16 @@ class Transaction
     public function setAmount($amount)
     {
         $this->amount = $amount;
-
+        $this->handleAmount();
         return $this;
+    }
+
+    private function handleAmount()
+    {
+        if ($this->type == 'expense' || $this->type == 'endofyear')
+        {
+            $this->amount = -1 * abs($this->amount);
+        }
     }
 
     /**
@@ -169,13 +177,4 @@ class Transaction
     {
         return $this->user_id;
     }
-
-    public function handleAmount()
-    {
-        if ($this->type == 'expense' || $this->type == 'endofyear')
-        {
-            $this->amount = -1 * abs($this->amount);
-        }
-    }
-
 }
