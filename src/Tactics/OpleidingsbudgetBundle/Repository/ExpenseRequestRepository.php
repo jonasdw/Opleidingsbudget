@@ -14,6 +14,17 @@ class ExpenseRequestRepository extends EntityRepository
     public function getExpenseRequestWithUsers()
     {
 
-
     }
+
+    public function getExpenseRequestPending()
+    {
+        $query = $this->getEntityManager()->createQuery(
+            "SELECT e
+            FROM TacticsOpleidingsbudgetBundle:ExpenseRequest e
+            WHERE e.status = 'pending'");
+
+
+        return $query->getResult();
+    }
+
 }

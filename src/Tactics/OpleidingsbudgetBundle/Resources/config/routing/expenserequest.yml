@@ -28,7 +28,17 @@ expenserequest_update:
     defaults: { _controller: "TacticsOpleidingsbudgetBundle:ExpenseRequest:update" }
     requirements: { _method: post|put }
 
+expenserequest_update_pending:
+    pattern:  /{id}/update
+    defaults: { _controller: "TacticsOpleidingsbudgetBundle:ExpenseRequest:updatePending" }
+    requirements: { _method: post|get|put }
+
+expenserequest_update_executed:
+    pattern:  /{id}/update
+    defaults: { _controller: "TacticsOpleidingsbudgetBundle:ExpenseRequest:updateApproved" }
+    requirements: { _method: post|get|put }
+
 expenserequest_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "TacticsOpleidingsbudgetBundle:ExpenseRequest:delete" }
-    requirements: { _method: post|delete }
+    requirements: { _method: post|get|delete }

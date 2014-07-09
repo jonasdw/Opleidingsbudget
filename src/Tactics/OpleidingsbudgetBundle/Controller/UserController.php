@@ -25,7 +25,13 @@
              //return new RedirectResponse("user/list");
              $users = $userManager->findUsers();
 
-             return $this->render('TacticsOpleidingsbudgetBundle::users.html.twig', array('users' =>   $users));
+             $em = $this->getDoctrine()->getManager();
+
+             $pending = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->getExpenseRequestPending();
+
+             return $this->render('TacticsOpleidingsbudgetBundle::admin.html.twig', array(
+                 'users' =>   $users,
+                 'expenserequests' => $pending));
          }
          if ($this->get('security.context')->isGranted('ROLE_APPROVER') || $this->get('security.context')->isGranted('ROLE_EXECUTOR') ){
              $userManager = $this->get('fos_user.user_manager');
