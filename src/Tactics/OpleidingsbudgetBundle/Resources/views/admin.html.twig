@@ -1,0 +1,35 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h2>Requests</h2>
+    <table class="records_list">
+        <thead>
+        <tr>
+            <th>Requested at</th>
+
+            <th>Amount</th>
+            <th>Description</th>
+            <th>User</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for expenserequest in expenserequests %}
+            <tr>
+                <td>{% if expenserequest.datepending %}{{ expenserequest.datepending|date('d-m-Y') }}{% endif %}</td>
+                <!-- AMOUNT is negatief opgeslaan, maar mag positief weergegeven worden | het gaat om een kost -->
+                <td>{{ expenserequest.amount }}</td>
+                <td>{{ expenserequest.description }}</td>
+                <!-- username -->
+                <td>{{ expenserequest.userid }}</td>
+                <!-- url to set date and status approved
+                     or to delete the request! -->
+                <td><a href="{{ path('expenserequest_update_pending', { 'id': expenserequest.id }) }}">approve</a></td>
+                <td><a onclick="return confirm('are u sure u want to delete?')" href="{{ path('expenserequest_delete', { 'id': expenserequest.id }) }}">delete</a></td>
+            </tr>
+        {% endfor %}
+
+        <!-- -->
+        </tbody>
+    </table>
+{% endblock %}
