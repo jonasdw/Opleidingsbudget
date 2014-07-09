@@ -14,7 +14,7 @@ services:
 
     tactics_user.alter_users.form.type:
         class: Tactics\OpleidingsbudgetBundle\Form\Type\ProfileFormType
-        arguments: [%fos_user.model.user.class%]
+        arguments: [%fos_user.model.user.class%, @security.context]
         tags:
             - { name: form.type, alias: alter_users }
 
