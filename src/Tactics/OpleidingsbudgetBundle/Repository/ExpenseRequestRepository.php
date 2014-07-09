@@ -11,11 +11,6 @@ use Doctrine\ORM\EntityRepository;
 
 class ExpenseRequestRepository extends EntityRepository
 {
-    public function getExpenseRequestWithUsers()
-    {
-
-    }
-
     public function getExpenseRequestPending()
     {
         $query = $this->getEntityManager()->createQuery(
@@ -27,4 +22,14 @@ class ExpenseRequestRepository extends EntityRepository
         return $query->getResult();
     }
 
+    public function getExpenseRequestApproved()
+    {
+        $query = $this->getEntityManager()->createQuery(
+            "SELECT e
+            FROM TacticsOpleidingsbudgetBundle:ExpenseRequest e
+            WHERE e.status = 'approved'");
+
+
+        return $query->getResult();
+    }
 }
