@@ -11,21 +11,21 @@ use Doctrine\ORM\EntityRepository;
 
 class TransactionRepository extends EntityRepository
 {
-    public function getUserBudget($usrid)
+    public function getUserBudget($user)
     {
         $query = $this->getEntityManager()->createQuery(
-            'SELECT t.amount
+           "SELECT t.amount
             FROM TacticsOpleidingsbudgetBundle:Transaction t
-            WHERE t.user_id = :id');
-        $query->setParameter('id', $usrid);
+            WHERE t.user = :user");
+
+        $query->setParameter('user', $user);
 
         $transactions = $query->getResult();
-        $budget = 10;
+        $budget = 0;
 
         foreach ($transactions as $transaction){
             $budget = $budget+floatval($transaction["amount"]);
          }
-
 
         return $budget;
     }

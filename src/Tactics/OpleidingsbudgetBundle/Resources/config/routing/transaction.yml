@@ -10,22 +10,14 @@ transaction_show:
     pattern:  /{id}/show
     defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:show" }
 
-transaction_new_budget:
-    pattern:  /new/{usrid}/budget
-    defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:newBudget" }
+transaction_new:
+    pattern:  /new/{usrid}/{type}
+    defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:new" }
 
-transaction_new_endofyear:
-    pattern:  /new/{usrid}/endofyear
-    defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:newEndofYear" }
-
-transaction_new_expense:
-    pattern:  /new/{usrid}/{expreid}/expense
-    defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:newExpense" }
-
-transaction_create:
-    pattern:  /create
-    defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:create" }
-    requirements: { _method: post }
+#transaction_create:
+#    pattern:  /create
+#    defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:create" }
+#    requirements: { _method: post }
 
 transaction_edit:
     pattern:  /{id}/edit

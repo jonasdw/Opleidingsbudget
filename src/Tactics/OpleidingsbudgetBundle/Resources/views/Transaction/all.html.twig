@@ -20,10 +20,11 @@
                 <td>{{ entity.amount }}</td>
                 {% if entity.type == 'expense' %}
                     <!--<td><a href="{{ path('transaction_show', { 'id': entity.id }) }}">info</a></td>-->
-                    <td><a href="{{ path('expenserequest_show', {'id': entity.expenserequestid}) }}">info</a></td>
+                    <td><a href="{{ path('expenserequest_show', {'id': entity.user.id}) }}">info</a></td>
                 {% else %}
                     <td>geen extra info</td>
                 {% endif %}
+                <td>{{ entity.user.firstname }}</td>
             </tr>
         {% endfor %}
         </tbody>

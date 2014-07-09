@@ -2,6 +2,7 @@
 
 namespace Tactics\OpleidingsbudgetBundle\Controller;
 
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -29,14 +30,11 @@ class TransactionController extends Controller
         //GET ALL TRANSACTIONS
         //$entities = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findAll();
 
-        $budget = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->getUserBudget($user->getId());
+        $budget = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->getUserBudget($user);
 
 
         //GET TRANSACTIONS PER current USER | sort by date
-        $entities = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findBy(
-            array('user_id' => $user->getId()),
-            array('date' => 'ASC')
-        );
+        $entities = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findByUser($user);
 
         return $this->render('TacticsOpleidingsbudgetBundle:Transaction:index.html.twig', array(
             'entities' => $entities,
@@ -62,22 +60,26 @@ class TransactionController extends Controller
             'entities' => $entities
         ));
     }
+
     /**
-     * Creates a new Transaction entity.
+     * Displays a form to create a new Transaction entity.
      *
      */
-    public function createAction(Request $request)
+    public function newAction(Request $request, $usrid, $type)
     {
-        $entity = new Transaction();
-        $form = $this->createCreateForm($entity);
+        /*hoe EXPENSE actie opvangen? parameter die default 0 is?*/
+        $userManager = $this->get('fos_user.user_manager');
+        $user = $userManager->findUserBy(array('id' => $usrid));
+
+        $entity = new Transaction($user, $type);
+
+        $form = $this->createCreateForm($entity, $this->generateUrl('transaction_new', array('usrid' => $usrid, 'type' => $type)));
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('transaction_show', array('id' => $entity->getId())));
+        if ($this->processTransactionForm($form, $entity)){
+            return $this->redirect($this->generateUrl('transaction_show', array(
+                'id' => $entity->getId()
+            )));
         }
 
         return $this->render('TacticsOpleidingsbudgetBundle:Transaction:new.html.twig', array(
@@ -87,16 +89,17 @@ class TransactionController extends Controller
     }
 
     /**
-    * Creates a form to create a Transaction entity.
-    *
-    * @param Transaction $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createCreateForm(Transaction $entity)
+     * Creates a form to create a Transaction entity.
+     *
+     * @param Transaction $entity The entity
+     *
+     * @param string $action
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createCreateForm(Transaction $entity, $action)
     {
         $form = $this->createForm(new TransactionType(), $entity, array(
-            'action' => $this->generateUrl('transaction_create'),
+            'action' => $action,
             'method' => 'POST',
         ));
 
@@ -106,47 +109,21 @@ class TransactionController extends Controller
     }
 
     /**
-     * Displays a form to create a new Transaction entity.
-     *
+     * @param FormInterface $form
+     * @param \Tactics\OpleidingsbudgetBundle\Entity\Transaction $transaction
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function newBudgetAction($usrid)
+    private function processTransactionForm(FormInterface $form, Transaction $transaction)
     {
-        $entity = new Transaction();
-        $entity->setType('budget');
-        $entity->setUserId($usrid);
-        $form   = $this->createCreateForm($entity);
+        if ($this->get('request')->getMethod() === 'POST' && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($transaction);
+            $em->flush();
 
-        return $this->render('TacticsOpleidingsbudgetBundle:Transaction:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
-    }
+            return true;
+        }
 
-    public function newEndofYearAction($usrid)
-    {
-        $entity = new Transaction();
-        $entity->setType('endofyear');
-        $entity->setUserId($usrid);
-        $form   = $this->createCreateForm($entity);
-
-        return $this->render('TacticsOpleidingsbudgetBundle:Transaction:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
-    }
-
-    public function newExpenseAction($usrid, $expreid)
-    {
-        $entity = new Transaction();
-        $entity->setType('expense');
-        $entity->setUserId($usrid);
-        $entity->setExpenserequestId($expreid);
-        $form   = $this->createCreateForm($entity);
-
-        return $this->render('TacticsOpleidingsbudgetBundle:Transaction:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+        return false;
     }
 
     /**

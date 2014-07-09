@@ -32,16 +32,18 @@ class Transaction
     /**
      * @var integer
      */
-    private $expenserequest_id;
+    private $expenserequest;
 
     /**
      * @var integer
      */
-    private $user_id;
+    private $user;
 
-    public function __construct()
+    public function __construct(User $user, $type)
     {
         $this->date = new \DateTime();
+        $this->user = $user;
+        $this->type = $type;
     }
 
 
@@ -131,50 +133,22 @@ class Transaction
     {
         return $this->date;
     }
-
     /**
-     * Set expenserequest_id
-     *
-     * @param integer $expenserequestId
-     * @return Transaction
-     */
-    public function setExpenserequestId($expenserequestId)
-    {
-        $this->expenserequest_id = $expenserequestId;
-
-        return $this;
-    }
-
-    /**
-     * Get expenserequest_id
+     * Get expenserequest
      *
      * @return integer
      */
-    public function getExpenserequestId()
+    public function getExpenserequest()
     {
-        return $this->expenserequest_id;
+        return $this->expenserequest;
     }
-
     /**
-     * Set user_id
-     *
-     * @param integer $userId
-     * @return Transaction
-     */
-    public function setUserId($userId)
-    {
-        $this->user_id = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get user_id
+     * Get user
      *
      * @return integer
      */
-    public function getUserId()
+    public function getUser()
     {
-        return $this->user_id;
+        return $this->user;
     }
 }

@@ -20,8 +20,8 @@ class TransactionType extends AbstractType
             ->add('amount')
             ->add('type', 'hidden')
             ->add('date')
-            ->add('expenserequest_id', 'hidden')
-            ->add('user_id', 'hidden')
+            //->add('expenserequest_id', 'hidden')
+           // ->add('user_id', 'hidden')
         ;
     }
     
