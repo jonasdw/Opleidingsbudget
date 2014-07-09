@@ -240,6 +240,24 @@ class ExpenseRequestController extends Controller
         return $this->redirect($this->generateUrl('home'));
     }
 
+    public function updateApprovedAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find ExpenseRequest entity.');
+        }
+
+        $entity->setStatus('executed');
+        $entity->setDateExecuted(new \DateTime());
+        $em->flush();
+
+
+
+        return $this->redirect($this->generateUrl('home'));
+    }
     /**
      * Deletes a ExpenseRequest entity.
      *
