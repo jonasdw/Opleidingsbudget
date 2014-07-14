@@ -21,8 +21,5 @@ class UserRepository extends EntityRepository
             )->setParameter('role', '%ROLE_APPROVER%');
 
             return $query->getResult();
-
-
-
         }
 } 

@@ -14,17 +14,16 @@
         </tr>
         </thead>
         <tbody>
-        {% for entity in entities %}
-            <tr class="{{ entity.type }}">
-                <td>{% if entity.date %}{{ entity.date|date('d-m-Y') }}{% endif %}</td>
-                <td>{{ entity.amount }}</td>
-                {% if entity.type == 'expense' %}
-                    <!--<td><a href="{{ path('transaction_show', { 'id': entity.id }) }}">info</a></td>-->
-                    <td><a href="{{ path('expenserequest_show', {'id': entity.user.id}) }}">info</a></td>
+        {% for transaction in transactions %}
+            <tr class="{{ transaction.type }}">
+                <td>{% if transaction.date %}{{ transaction.date|date('d-m-Y') }}{% endif %}</td>
+                <td>{{ transaction.amount }}</td>
+                {% if transaction.type == 'expense' %}
+                    <td><a href="{{ path('expenserequest_show', {'id': transaction.user.id}) }}">info</a></td>
                 {% else %}
                     <td>geen extra info</td>
                 {% endif %}
-                <td>{{ entity.user.firstname }}</td>
+                <td>{{ transaction.user.firstname }}</td>
             </tr>
         {% endfor %}
         </tbody>

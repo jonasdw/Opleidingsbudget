@@ -16,64 +16,79 @@ class ExpenseRequestController extends Controller
 {
 
     /**
-     * Lists all ExpenseRequest entities.
-     *
+     * Lists current user ExpenseRequest entities.
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $budget = $this->getBudgetPerUser($this->getCurrentUser());
 
-        //GET CURRENT USER
-        $user = $this->get('security.context')->getToken()->getUser();
-
-        //GET ALL TRANSACTIONS
-        //$entities = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->findAll();
-
-        $budget = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->getUserBudget($user->getId());
-
-        //GET TRANSACTIONS PER current USER | sort by date
-        $entities = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->findByUser($user);
+        $expenseRequests = $this->getExpenseRequestsPerUser($this->getCurrentUser());
 
         return $this->render('TacticsOpleidingsbudgetBundle:ExpenseRequest:index.html.twig', array(
-            'entities' => $entities,
-            'user' => $user,
+            'expenseRequests' => $expenseRequests,
+            'user' => $this->getCurrentUser(),
             'budget' => $budget
         ));
     }
 
-    public function allAction()
+    private function getCurrentUser()
+    {
+        return $this->get('security.context')->getToken()->getUser();
+    }
+
+    private function getBudgetPerUser($user)
     {
         $em = $this->getDoctrine()->getManager();
 
-        //GET ALL TRANSACTIONS
-        $entities = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->findAll();
+        return $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->getUserBudget($user);
+    }
+
+    private function getExpenseRequestsPerUser($user)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        return  $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->findByUser($this->getCurrentUser());
+    }
+
+    /**
+     * Lists all ExpenseRequest entities.
+     */
+    public function allAction()
+    {
+        $expenseRequests = $this->getAllExpenseRequests();
 
         return $this->render('TacticsOpleidingsbudgetBundle:ExpenseRequest:all.html.twig', array(
-            'entities' => $entities
+            'expenseRequests' => $expenseRequests
         ));
     }
+
+    private function getAllExpenseRequests()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        return $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->findAll();
+    }
+
     /**
      * Creates a new ExpenseRequest entity.
      *
      */
     public function createAction(Request $request)
     {
-        $user = $this->get('security.context')->getToken()->getUser();
-
-        $entity = new ExpenseRequest($user);
-        $form = $this->createCreateForm($entity);
+        $expenseRequest = new ExpenseRequest($this->getCurrentUser());
+        $form = $this->createCreateForm($expenseRequest);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
+            $em->persist($expenseRequest);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('expenserequest_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('expenserequest_show', array('id' => $expenseRequest->getId())));
         }
 
         return $this->render('TacticsOpleidingsbudgetBundle:ExpenseRequest:new.html.twig', array(
-            'entity' => $entity,
+            'expenseRequest' => $expenseRequest,
             'form'   => $form->createView(),
         ));
     }
@@ -81,13 +96,13 @@ class ExpenseRequestController extends Controller
     /**
     * Creates a form to create a ExpenseRequest entity.
     *
-    * @param ExpenseRequest $entity The entity
+    * @param ExpenseRequest $expenseRequest The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(ExpenseRequest $entity)
+    private function createCreateForm(ExpenseRequest $expenseRequest)
     {
-        $form = $this->createForm(new ExpenseRequestType(), $entity, array(
+        $form = $this->createForm(new ExpenseRequestType(), $expenseRequest, array(
             'action' => $this->generateUrl('expenserequest_create'),
             'method' => 'POST',
         ));
@@ -103,14 +118,12 @@ class ExpenseRequestController extends Controller
      */
     public function newAction()
     {
-        $user = $this->get('security.context')->getToken()->getUser();
+        $expenseRequest = new ExpenseRequest($this->getCurrentUser());
 
-        $entity = new ExpenseRequest($user);
-
-        $form   = $this->createCreateForm($entity);
+        $form   = $this->createCreateForm($expenseRequest);
 
         return $this->render('TacticsOpleidingsbudgetBundle:ExpenseRequest:new.html.twig', array(
-            'entity' => $entity,
+            'expenseRequest' => $expenseRequest,
             'form'   => $form->createView(),
         ));
     }

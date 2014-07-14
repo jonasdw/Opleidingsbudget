@@ -16,27 +16,18 @@
         </tr>
         </thead>
         <tbody>
-        {% for entity in entities %}
-            <tr class="{{ entity.status }}">
-                <td>{% if entity.datepending %}{{ entity.datepending|date('d-m-Y') }}{% endif %}</td>
-                <td>{% if entity.dateapproved %}{{ entity.dateapproved|date('d-m-Y') }}{% else %}x{% endif %}</td>
-                <td>{% if entity.dateexecuted %}{{ entity.dateexecuted|date('d-m-Y') }}{% else %}x{% endif %}</td>
+        {% for expenseRequest in expenseRequests %}
+            <tr class="{{ expenseRequest.status }}">
+                <td>{% if expenseRequest.datepending %}{{ expenseRequest.datepending|date('d-m-Y') }}{% endif %}</td>
+                <td>{% if expenseRequest.dateapproved %}{{ expenseRequest.dateapproved|date('d-m-Y') }}{% else %}x{% endif %}</td>
+                <td>{% if expenseRequest.dateexecuted %}{{ expenseRequest.dateexecuted|date('d-m-Y') }}{% else %}x{% endif %}</td>
 
-                <td>{{ entity.amount * -1 }}</td>
-                <td>{{ entity.description }}</td>
-                <td>{{ entity.user.firstname }}</td>
-                <td><a href="{{ path('expenserequest_show', { 'id': entity.id }) }}">meer info</a></td>
+                <td>{{ expenseRequest.amount }}</td>
+                <td>{{ expenseRequest.description }}</td>
+                <td>{{ expenseRequest.user.firstname }}</td>
+                <td><a href="{{ path('expenserequest_show', { 'id': expenseRequest.id }) }}">meer info</a></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    <!--
-        <ul>
-            <li>
-                <a href="{{ path('expenserequest_new') }}">
-                    Create a new entry
-                </a>
-            </li>
-        </ul>
--->
 {% endblock %}

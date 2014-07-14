@@ -2,10 +2,6 @@ home:
   pattern: /
   defaults: { _controller: TacticsOpleidingsbudgetBundle:User:index }
 
-user_list:
-  pattern: /user/list
-  defaults: { _controller: TacticsOpleidingsbudgetBundle:User:users }
-
 tactics_edit_user:
   pattern: /profile/edit/{username}
   defaults: { _controller: TacticsOpleidingsbudgetBundle:Profile:edit }

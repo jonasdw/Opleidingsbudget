@@ -11,79 +11,87 @@ use Tactics\OpleidingsbudgetBundle\Form\TransactionType;
 
 /**
  * Transaction controller.
- *
  */
 class TransactionController extends Controller
 {
-
     /**
      * Lists all Transaction entities.
-     *
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $budget = $this->getBudgetPerUser($this->getCurrentUser());
 
-        //GET CURRENT USER
-        $user = $this->get('security.context')->getToken()->getUser();
-
-        //GET ALL TRANSACTIONS
-        //$entities = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findAll();
-
-        $budget = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->getUserBudget($user);
-
-
-        //GET TRANSACTIONS PER current USER | sort by date
-        $entities = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findByUser($user);
+        $transactions = $this->getTransactionsPerUser($this->getCurrentUser());
 
         return $this->render('TacticsOpleidingsbudgetBundle:Transaction:index.html.twig', array(
-            'entities' => $entities,
-            'user' => $user,
+            'transactions' => $transactions,
+            'user' => $this->getCurrentUser(),
             'budget' => $budget
         ));
     }
-    public function allAction()
+
+    private function getCurrentUser()
+    {
+        return $this->get('security.context')->getToken()->getUser();
+    }
+
+    private function getBudgetPerUser($user)
     {
         $em = $this->getDoctrine()->getManager();
 
-        //GET ALL TRANSACTIONS
-        $entities = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findAll(
-            array('date' => 'ASC')
-        );
+        return $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->getUserBudget($user);
+    }
 
-        //GET TRANSACTIONS PER current USER | sort by date
-       // $entities = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findBy(
-         //   array('date' => 'ASC')
-        //);
+    private function getTransactionsPerUser($user)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        return  $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findByUser($user);
+    }
+
+    /**
+     * Lists all Transaction entities.
+     */
+    public function allAction()
+    {
+        $transactions = $this->getAllTransactions();
 
         return $this->render('TacticsOpleidingsbudgetBundle:Transaction:all.html.twig', array(
-            'entities' => $entities
+            'transactions' => $transactions
         ));
+    }
+
+    private function getAllTransactions()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        return $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findAll(
+            array('date' => 'ASC')
+        );
     }
 
     /**
      * Displays a form to create a new Transaction entity.
-     *
      */
-    public function newAction(Request $request, $usrid, $type)
+    public function newAction(Request $request, $userid, $type)
     {
         /*hoe EXPENSE actie opvangen? parameter die default 0 is?*/
         $userManager = $this->get('fos_user.user_manager');
-        $user = $userManager->findUserBy(array('id' => $usrid));
+        $user = $userManager->findUserBy(array('id' => $userid));
 
-        $entity = new Transaction($user, $type);
+        $transaction = new Transaction($user, $type);
 
-        $form = $this->createCreateForm($entity, $this->generateUrl('transaction_new', array('usrid' => $usrid, 'type' => $type)));
+        $form = $this->createCreateForm($transaction, $this->generateUrl('transaction_new', array('userid' => $userid, 'type' => $type)));
         $form->handleRequest($request);
 
-        if ($this->processTransactionForm($form, $entity)){
+        if ($this->processTransactionForm($form, $transaction)){
             return $this->redirect($this->generateUrl('transaction_show', array(
-                'id' => $entity->getId()
+                'id' => $transaction->getId()
             )));
         }
 
         return $this->render('TacticsOpleidingsbudgetBundle:Transaction:new.html.twig', array(
-            'entity' => $entity,
+            'transaction' => $transaction,
             'form'   => $form->createView(),
         ));
     }

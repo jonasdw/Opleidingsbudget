@@ -11,7 +11,7 @@ transaction_show:
     defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:show" }
 
 transaction_new:
-    pattern:  /new/{usrid}/{type}
+    pattern:  /new/{userid}/{type}
     defaults: { _controller: "TacticsOpleidingsbudgetBundle:Transaction:new" }
 
 #transaction_create:

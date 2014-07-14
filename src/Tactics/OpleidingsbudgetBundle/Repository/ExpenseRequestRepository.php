@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityRepository;
 
 class ExpenseRequestRepository extends EntityRepository
 {
-    public function getExpenseRequestPending()
+    public function getPendingExpenseRequest()
     {
         $query = $this->getEntityManager()->createQuery(
             "SELECT e
@@ -22,7 +22,7 @@ class ExpenseRequestRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function getExpenseRequestApproved()
+    public function getApprovedExpenseRequest()
     {
         $query = $this->getEntityManager()->createQuery(
             "SELECT e
