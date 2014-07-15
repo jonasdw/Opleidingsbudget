@@ -16,7 +16,7 @@
             <a href="{{ path('tactics_edit_user', { 'username': app.user.username }) }}">edit profile</a>
             <br /><br />
             {% block menu %}
-                {% if is_granted("ROLE_APPROVER") %}
+                {% if is_granted("ROLE_APPROVER") or is_granted("ROLE_EXECUTOR") %}
                     <a href="{{ path('home') }}">home</a>
                     <a href="{{ path('transaction_all') }}">
                         Transactions

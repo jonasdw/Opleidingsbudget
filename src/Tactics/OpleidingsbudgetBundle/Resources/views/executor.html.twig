@@ -1,0 +1,35 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+<h2>Requests</h2>
+<table class="records_list">
+    <thead>
+    <tr>
+        <th>Requested at</th>
+        <th>Approved at</th>
+
+        <th>Amount</th>
+        <th>Description</th>
+        <th>User</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for expenserequest in expenserequests %}
+        <tr>
+            <td>{% if expenserequest.datepending %}{{ expenserequest.datepending|date('d-m-Y') }}{% endif %}</td>
+            <td>{% if expenserequest.dateapproved %}{{ expenserequest.dateapproved|date('d-m-Y') }}{% endif %}</td>
+
+            <td>{{ expenserequest.amount }}</td>
+            <td>{{ expenserequest.description }}</td>
+            <!-- username -->
+            <td>{{ expenserequest.user.firstname }}</td>
+            <!-- url to set date and status approved
+                 or to delete the request! -->
+            <td><a href="{{ path('expenserequest_update_pending', { 'id': expenserequest.id, 'status': expenserequest.status, 'userid': expenserequest.user.id }) }}">execute</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

@@ -33,9 +33,11 @@
 
          if ($this->isExecutor() )
          {
-             $users = $this->userManager()->findUsers();
+             $approved = $this->getApprovedExpenseRequests();
 
-             return $this->render('TacticsOpleidingsbudgetBundle::users.html.twig', array('users' =>   $users));
+             return $this->render('TacticsOpleidingsbudgetBundle::executor.html.twig', array(
+                 'expenserequests' => $approved
+             ));
          }
 
          return new RedirectResponse($this->generateUrl('transaction'));
@@ -84,5 +86,13 @@
          $pending = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->getPendingExpenseRequest();
 
          return $pending;
+     }
+
+     private function getApprovedExpenseRequests()
+     {
+         $em = $this->getDoctrine()->getManager();
+         $approved = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->getApprovedExpenseRequest();
+
+         return $approved;
      }
  }
