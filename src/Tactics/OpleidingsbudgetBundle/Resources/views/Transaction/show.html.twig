@@ -23,26 +23,12 @@
             </tr>
             <tr>
                 <th>Expenserequest_id</th>
-                <td>{{ entity.expenserequestid }}</td>
+                <td>{% if entity.type == "expense" %}{{ entity.expenserequest.id }}{% endif %}</td>
             </tr>
             <tr>
                 <th>User_id</th>
-                <td>{{ entity.userid }}</td>
+                <td>{{ entity.user.id }}</td>
             </tr>
         </tbody>
     </table>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('transaction') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('transaction_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
 {% endblock %}
