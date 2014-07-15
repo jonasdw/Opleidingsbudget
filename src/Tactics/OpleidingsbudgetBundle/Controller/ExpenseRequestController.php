@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Tactics\OpleidingsbudgetBundle\Entity\ExpenseRequest;
 use Tactics\OpleidingsbudgetBundle\Form\ExpenseRequestType;
 use Tactics\OpleidingsbudgetBundle\Helper\Balans;
+use Tactics\OpleidingsbudgetBundle\Entity\Transaction;
 
 
 /**
@@ -235,7 +236,7 @@ class ExpenseRequestController extends Controller
         ));
     }
 
-    public function updatePendingAction($id)
+    public function updatePendingAction($id, $status, $userid)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -244,34 +245,24 @@ class ExpenseRequestController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find ExpenseRequest entity.');
         }
-
-        $entity->setStatus('approved');
-        $entity->setDateApproved(new \DateTime());
-        $em->flush();
-
-
-
-        return $this->redirect($this->generateUrl('home'));
-    }
-
-    public function updateApprovedAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find ExpenseRequest entity.');
+        if ($status == "pending")
+        {
+            $entity->setStatus('approved');
+            $entity->setDateApproved(new \DateTime());
         }
+        elseif ($status == "approved")
+        {
+            $entity->setStatus('executed');
+            $entity->setDateExecuted(new \DateTime());
+            $em->flush();
 
-        $entity->setStatus('executed');
-        $entity->setDateExecuted(new \DateTime());
+            return $this->redirect($this->generateUrl('transaction_new', array('userid' => $userid, 'type' => 'expense', 'expenserequestid' => $id )));
+        }
         $em->flush();
-
-
 
         return $this->redirect($this->generateUrl('home'));
     }
+
     /**
      * Deletes a ExpenseRequest entity.
      *

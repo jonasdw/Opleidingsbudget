@@ -29,14 +29,14 @@ expenserequest_update:
     requirements: { _method: post|put }
 
 expenserequest_update_pending:
-    pattern:  /{id}/update
+    pattern:  /{id}/{status}/update/{userid}
     defaults: { _controller: "TacticsOpleidingsbudgetBundle:ExpenseRequest:updatePending" }
     requirements: { _method: post|get|put }
 
-expenserequest_update_executed:
-    pattern:  /{id}/update
-    defaults: { _controller: "TacticsOpleidingsbudgetBundle:ExpenseRequest:updateApproved" }
-    requirements: { _method: post|get|put }
+#expenserequest_update_approved:
+                                            #    pattern:  /{id}/update
+                                            #    defaults: { _controller: "TacticsOpleidingsbudgetBundle:ExpenseRequest:updateApproved" }
+                                            #    requirements: { _method: post|get|put }
 
 expenserequest_delete:
     pattern:  /{id}/delete

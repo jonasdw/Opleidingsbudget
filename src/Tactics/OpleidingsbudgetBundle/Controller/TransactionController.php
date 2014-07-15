@@ -68,7 +68,6 @@ class TransactionController extends Controller
      */
     public function newAction(Request $request, $userid, $type, $expenserequestid)
     {
-        /*hoe EXPENSE actie opvangen? parameter die default 0 is?*/
         $userManager = $this->get('fos_user.user_manager');
         $user = $userManager->findUserBy(array('id' => $userid));
 
@@ -79,11 +78,11 @@ class TransactionController extends Controller
         {
             $em = $this->getDoctrine()->getManager();
             $expense = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->findBy(array ('id' => $expenserequestid));
-
+            //hieronder geeft hij fout
             $transaction->setExpenserequest($expense);
         }
 
-        $form = $this->createCreateForm($transaction, $this->generateUrl('transaction_new', array('userid' => $userid, 'type' => $type)));
+        $form = $this->createCreateForm($transaction, $this->generateUrl('transaction_new', array('userid' => $userid, 'type' => $type, 'expenserequestid' => $expenserequestid)));
         $form->handleRequest($request);
 
         if ($this->processTransactionForm($form, $transaction)){
