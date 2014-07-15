@@ -12,13 +12,16 @@
      {
          if ($this->isApprover())
          {
-             $users = $this->userManager()->findUsers();
+             $em = $this->getDoctrine()->getManager();
+
+             $test =  $em->getRepository('TacticsOpleidingsbudgetBundle:User')->getUsersWithData();
 
              $pending = $this->getPendingExpenseRequests();
 
              return $this->render('TacticsOpleidingsbudgetBundle::admin.html.twig', array(
-                 'users' =>   $users,
-                 'expenserequests' => $pending));
+                 'expenserequests' => $pending,
+                 'users' => $test
+             ));
          }
 
          if ($this->isExecutor() )

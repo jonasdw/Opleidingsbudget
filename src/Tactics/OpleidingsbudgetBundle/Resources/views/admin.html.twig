@@ -17,7 +17,6 @@
         {% for expenserequest in expenserequests %}
             <tr>
                 <td>{% if expenserequest.datepending %}{{ expenserequest.datepending|date('d-m-Y') }}{% endif %}</td>
-                <!-- AMOUNT is negatief opgeslaan, maar mag positief weergegeven worden | het gaat om een kost -->
                 <td>{{ expenserequest.amount }}</td>
                 <td>{{ expenserequest.description }}</td>
                 <!-- username -->
@@ -28,8 +27,38 @@
                 <td><a onclick="return confirm('are u sure u want to delete?')" href="{{ path('expenserequest_delete', { 'id': expenserequest.id }) }}">delete</a></td>
             </tr>
         {% endfor %}
+        </tbody>
+    </table>
 
-        <!-- -->
+
+
+    <h2>All users</h2>
+    <table class="records_list">
+        <thead>
+        <tr>
+            <th>Naam</th>
+            <th>Budget</th>
+            <th>Transactions</th>
+            <th>Requests</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.0.name }}</td>
+                <td> {{ user.0.budget }}</td>
+                <td>{{ user.0.trans }}</td>
+                <td>{{ user.0.expense }}</td>
+                <td><a href="{{ path('transaction_new', { 'userid': user.0.id, 'type': 'budget' }) }}">make rich</a></td>
+                <td><a href="{{ path('transaction_new', { 'userid': user.0.id, 'type': 'endofyear' }) }}">make poor</a></td>
+
+                <!-- url to set date and status approved
+                     or to delete the request! -->
+
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
 {% endblock %}
