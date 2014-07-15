@@ -142,6 +142,11 @@ class Transaction
     {
         return $this->expenserequest;
     }
+
+    public function setExpenserequest($expenserequest)
+    {
+        $this->expenserequest = $expenserequest;
+    }
     /**
      * Get user
      *

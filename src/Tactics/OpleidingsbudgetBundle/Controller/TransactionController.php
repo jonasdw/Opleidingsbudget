@@ -66,13 +66,22 @@ class TransactionController extends Controller
     /**
      * Displays a form to create a new Transaction entity.
      */
-    public function newAction(Request $request, $userid, $type)
+    public function newAction(Request $request, $userid, $type, $expenserequestid)
     {
         /*hoe EXPENSE actie opvangen? parameter die default 0 is?*/
         $userManager = $this->get('fos_user.user_manager');
         $user = $userManager->findUserBy(array('id' => $userid));
 
         $transaction = new Transaction($user, $type);
+
+
+        if ($type == "expense")
+        {
+            $em = $this->getDoctrine()->getManager();
+            $expense = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->findBy(array ('id' => $expenserequestid));
+
+            $transaction->setExpenserequest($expense);
+        }
 
         $form = $this->createCreateForm($transaction, $this->generateUrl('transaction_new', array('userid' => $userid, 'type' => $type)));
         $form->handleRequest($request);
