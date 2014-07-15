@@ -25,7 +25,7 @@
 
              $pending = $this->getPendingExpenseRequests();
 
-             return $this->render('TacticsOpleidingsbudgetBundle::admin.html.twig', array(
+             return $this->render('TacticsOpleidingsbudgetBundle::approver.html.twig', array(
                  'expenserequests' => $pending,
                  'usersdata' => $summary->getData()
              ));
