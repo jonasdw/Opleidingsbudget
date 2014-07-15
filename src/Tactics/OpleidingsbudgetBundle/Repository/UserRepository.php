@@ -22,7 +22,7 @@ class UserRepository extends EntityRepository
 
         return $query->getResult();
     }
-
+/*
     public function getUsersWithData()
     {
         $q = $this->getEntityManager()->createQuery("SELECT u FROM TacticsOpleidingsbudgetBundle:User u");
@@ -65,4 +65,5 @@ class UserRepository extends EntityRepository
 
         return $usersWithData;
     }
+*/
 } 

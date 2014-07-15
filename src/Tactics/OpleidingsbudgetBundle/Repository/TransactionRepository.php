@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityRepository;
 
 class TransactionRepository extends EntityRepository
 {
+    /*
     public function getUserBudget($user)
     {
         $query = $this->getEntityManager()->createQuery(
@@ -29,4 +30,5 @@ class TransactionRepository extends EntityRepository
 
         return $budget;
     }
+    */
 }
