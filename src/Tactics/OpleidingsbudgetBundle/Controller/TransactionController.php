@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Tactics\OpleidingsbudgetBundle\Entity\Transaction;
 use Tactics\OpleidingsbudgetBundle\Form\TransactionType;
+use Tactics\OpleidingsbudgetBundle\Helper\Balans;
 
 /**
  * Transaction controller.
@@ -19,27 +20,19 @@ class TransactionController extends Controller
      */
     public function indexAction()
     {
-        $budget = $this->getBudgetPerUser($this->getCurrentUser());
-
         $transactions = $this->getTransactionsPerUser($this->getCurrentUser());
+        $budget = new Balans($transactions);
 
         return $this->render('TacticsOpleidingsbudgetBundle:Transaction:index.html.twig', array(
             'transactions' => $transactions,
             'user' => $this->getCurrentUser(),
-            'budget' => $budget
+            'budget' => $budget->getUserBalans()
         ));
     }
 
     private function getCurrentUser()
     {
         return $this->get('security.context')->getToken()->getUser();
-    }
-
-    private function getBudgetPerUser($user)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        return $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->getUserBudget($user);
     }
 
     private function getTransactionsPerUser($user)

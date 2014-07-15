@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Tactics\OpleidingsbudgetBundle\Entity\ExpenseRequest;
 use Tactics\OpleidingsbudgetBundle\Form\ExpenseRequestType;
+use Tactics\OpleidingsbudgetBundle\Helper\Balans;
+
 
 /**
  * ExpenseRequest controller.
@@ -20,14 +22,15 @@ class ExpenseRequestController extends Controller
      */
     public function indexAction()
     {
-        $budget = $this->getBudgetPerUser($this->getCurrentUser());
+        $transactions = $this->getTransactionsPerUser($this->getCurrentUser());
+        $budget = new Balans($transactions);
 
         $expenseRequests = $this->getExpenseRequestsPerUser($this->getCurrentUser());
 
         return $this->render('TacticsOpleidingsbudgetBundle:ExpenseRequest:index.html.twig', array(
             'expenseRequests' => $expenseRequests,
             'user' => $this->getCurrentUser(),
-            'budget' => $budget
+            'budget' => $budget->getUserBalans()
         ));
     }
 
@@ -36,11 +39,11 @@ class ExpenseRequestController extends Controller
         return $this->get('security.context')->getToken()->getUser();
     }
 
-    private function getBudgetPerUser($user)
+    private function getTransactionsPerUser($user)
     {
         $em = $this->getDoctrine()->getManager();
 
-        return $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->getUserBudget($user);
+        return  $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findByUser($user);
     }
 
     private function getExpenseRequestsPerUser($user)

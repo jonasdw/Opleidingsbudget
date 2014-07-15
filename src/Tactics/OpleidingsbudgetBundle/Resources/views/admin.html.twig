@@ -45,14 +45,14 @@
         </tr>
         </thead>
         <tbody>
-        {% for user in users %}
+        {% for data in usersdata %}
             <tr>
-                <td>{{ user.0.name }}</td>
-                <td> {{ user.0.budget }}</td>
-                <td>{{ user.0.trans }}</td>
-                <td>{{ user.0.expense }}</td>
-                <td><a href="{{ path('transaction_new', { 'userid': user.0.id, 'type': 'budget' }) }}">make rich</a></td>
-                <td><a href="{{ path('transaction_new', { 'userid': user.0.id, 'type': 'endofyear' }) }}">make poor</a></td>
+                <td>{{ data.user.name }}</td>
+                <td> {{ data.transactions.balans }}</td>
+                <td>{{ data.transactions.count }}</td>
+                <td>{{ data.requests.count }}</td>
+                <td><a href="{{ path('transaction_new', { 'userid': data.user.id, 'type': 'budget' }) }}">make rich</a></td>
+                <td><a href="{{ path('transaction_new', { 'userid': data.user.id, 'type': 'endofyear' }) }}">make poor</a></td>
 
                 <!-- url to set date and status approved
                      or to delete the request! -->

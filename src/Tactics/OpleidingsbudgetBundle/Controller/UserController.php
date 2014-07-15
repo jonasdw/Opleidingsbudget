@@ -5,6 +5,7 @@
  use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  use Symfony\Component\Security\Core\SecurityContext;
  use Symfony\Component\HttpFoundation\RedirectResponse;
+ use Tactics\OpleidingsbudgetBundle\Helper\Summary;
 
  class UserController extends Controller
  {
@@ -14,13 +15,19 @@
          {
              $em = $this->getDoctrine()->getManager();
 
-             $test =  $em->getRepository('TacticsOpleidingsbudgetBundle:User')->getUsersWithData();
+             $users = $em->getRepository('TacticsOpleidingsbudgetBundle:User')->findAll();
+             $transactions = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findAll();
+             $requests = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->findAll();
+
+             $summary = new Summary($users, $transactions, $requests);
+
+
 
              $pending = $this->getPendingExpenseRequests();
 
              return $this->render('TacticsOpleidingsbudgetBundle::admin.html.twig', array(
                  'expenserequests' => $pending,
-                 'users' => $test
+                 'usersdata' => $summary->getData()
              ));
          }
 
