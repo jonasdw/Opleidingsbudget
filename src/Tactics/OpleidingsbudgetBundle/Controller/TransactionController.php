@@ -77,8 +77,8 @@ class TransactionController extends Controller
         if ($type == "expense")
         {
             $em = $this->getDoctrine()->getManager();
-            $expense = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->findBy(array ('id' => $expenserequestid));
-            //hieronder geeft hij fout
+            $expense = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->find(array ('id' => $expenserequestid));
+
             $transaction->setExpenserequest($expense);
         }
 

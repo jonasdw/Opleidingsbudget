@@ -143,7 +143,7 @@ class Transaction
         return $this->expenserequest;
     }
 
-    public function setExpenserequest($expenserequest)
+    public function setExpenserequest(ExpenseRequest $expenserequest)
     {
         $this->expenserequest = $expenserequest;
     }
