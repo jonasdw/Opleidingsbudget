@@ -75,7 +75,7 @@ class ExpenseRequest
      */
     public function setAmount($amount)
     {
-        $this->amount = -1 * abs($amount);
+        $this->amount = $amount;
 
         return $this;
     }
