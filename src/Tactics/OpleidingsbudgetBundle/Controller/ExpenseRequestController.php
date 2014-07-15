@@ -150,11 +150,16 @@ class ExpenseRequestController extends Controller
 
         //EXTRA BUFFER CHECK CURRENT USER vs REQUESTED EXPENSE USER ID
         //WHAT ABOUT EXECUTOR AND APPROVER?!
-        if (!$this->get('security.context')->isGranted('ROLE_APPROVER') || !$this->get('security.context')->isGranted('ROLE_APPROVER')) {
-
-        if ($entity->getUser()->getId() != $user->getId() ){
-            throw $this->createNotFoundException('This is not your expense!');
-        }}
+        if (!$this->get('security.context')->isGranted('ROLE_APPROVER'))
+        {
+            if (!$this->get('security.context')->isGranted('ROLE_EXECUTOR'))
+            {
+                if ($entity->getUser()->getId() != $user->getId() )
+                {
+                    throw $this->createNotFoundException('This is not your expense!');
+                }
+            }
+        }
 
         $deleteForm = $this->createDeleteForm($id);
 
