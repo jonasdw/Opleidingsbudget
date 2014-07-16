@@ -48,7 +48,7 @@
         {% for data in usersdata %}
             <tr>
                 <td>{{ data.user.name }}</td>
-                <td> {{ data.transactions.balans }}</td>
+                <td> {{ data.transactions.balans|money }}</td>
                 <td>{{ data.transactions.count }}</td>
                 <td>{{ data.requests.count }}</td>
                 <td><a href="{{ path('transaction_new', { 'userid': data.user.id, 'type': 'budget' }) }}">make rich</a></td>

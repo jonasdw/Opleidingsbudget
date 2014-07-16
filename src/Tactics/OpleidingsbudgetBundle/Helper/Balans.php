@@ -2,6 +2,9 @@
 
 namespace Tactics\OpleidingsbudgetBundle\Helper;
 
+use Money\Money;
+use Money\Currency;
+
 class Balans
 {
     private $transactions;
@@ -16,10 +19,9 @@ class Balans
     public function getUserBalans()
     {
         foreach ($this->transactions as $transaction){
-            $this->balans += floatval($transaction->getAmount());
-          //  var_dump($transaction->getAmount());
+            $this->balans += floatval($transaction->getAmount()->getAmount());
         }
 
-        return $this->balans;
+        return Money::EUR((int)$this->balans);
     }
 }

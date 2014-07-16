@@ -3,7 +3,8 @@
 namespace Tactics\OpleidingsbudgetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Money\Money;
+use Money\Currency;
 /**
  * Transaction
  */
@@ -15,9 +16,11 @@ class Transaction
     private $id;
 
     /**
-     * @var string
+     * @var integer
      */
-    private $amount;
+    private $amount = 0;
+
+    private $currency = 'EUR';
 
     /**
      * @var string
@@ -46,12 +49,6 @@ class Transaction
         $this->type = $type;
     }
 
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
     public function getId()
     {
         return $this->id;
@@ -60,32 +57,42 @@ class Transaction
     /**
      * Set amount
      *
-     * @param string $amount
-     * @return Transaction
+     * @param Money $amount
+     * @return ExpenseRequest
      */
-    public function setAmount($amount)
+    public function setAmount(Money $amount)
     {
-        $this->amount = $amount;
+        $this->amount = $amount->getAmount();
+        $this->currency = $amount->getCurrency();
         $this->handleAmount();
-        return $this;
+    }
+
+    /**
+     * Get amount
+     *
+     * @return Money
+     */
+    public function getAmount()
+    {
+        return new Money($this->amount, new Currency($this->currency));
     }
 
     private function handleAmount()
     {
         if ($this->type == 'expense' || $this->type == 'endofyear')
         {
-            $this->amount = -1 * abs($this->amount);
+            $this->amount = (-1 * $this->amount);
         }
     }
 
-    /**
-     * Get amount
-     *
-     * @return string
-     */
-    public function getAmount()
+    public function setCurrency($currency)
     {
-        return $this->amount;
+        $this->currency = $currency;
+    }
+
+    public function getCurrency()
+    {
+        return $this->currency;
     }
 
     /**

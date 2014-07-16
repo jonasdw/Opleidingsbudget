@@ -17,7 +17,7 @@
         {% for transaction in transactions %}
             <tr class="{{ transaction.type }}">
                 <td>{% if transaction.date %}{{ transaction.date|date('d-m-Y') }}{% endif %}</td>
-                <td>{{ transaction.amount }}</td>
+                <td>{{ transaction.amount|money }}</td>
                 {% if transaction.type == 'expense' %}
                     <td><a href="{{ path('expenserequest_show', {'id': transaction.expenserequest.id}) }}">info</a></td>
                 {% else %}

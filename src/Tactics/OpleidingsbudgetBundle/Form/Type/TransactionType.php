@@ -17,7 +17,7 @@ class TransactionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount')
+            ->add('amount', 'value_money')
             ->add('type', 'hidden')
             ->add('date')
             //->add('expenserequest_id', 'hidden')
