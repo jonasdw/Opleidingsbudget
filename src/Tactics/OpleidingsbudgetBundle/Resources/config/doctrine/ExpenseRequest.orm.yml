@@ -14,10 +14,13 @@ Tactics\OpleidingsbudgetBundle\Entity\ExpenseRequest:
 
     fields:
         amount:
-            type: decimal
-            precision: 6
-            scale: 2
+            type: integer
             nullable: false
+
+        currency:
+            type: text
+            length: 3
+            nullable: false;
 
         description:
             type: text

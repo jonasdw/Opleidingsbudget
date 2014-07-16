@@ -3,6 +3,9 @@
 namespace Tactics\OpleidingsbudgetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Money\Currency;
+use Money\Money;
+
 
 /**
  * ExpenseRequest
@@ -15,10 +18,12 @@ class ExpenseRequest
     private $id;
 
     /**
-     * @var string
-     * double?
+     * @var integer
+     *
      */
     private $amount;
+
+    private $currency;
 
     /**
      * @var string
@@ -55,6 +60,7 @@ class ExpenseRequest
         $this->date_pending = new \DateTime();
         $this->status = "pending";
         $this->user = $user;
+        $this->currency = 'EUR';
     }
 
     /**
@@ -70,24 +76,36 @@ class ExpenseRequest
     /**
      * Set amount
      *
-     * @param string $amount
+     * @param Money $amount
      * @return ExpenseRequest
      */
-    public function setAmount($amount)
+    public function setAmount(Money $amount)
     {
-        $this->amount = $amount;
-
+        $this->amount = $amount->getAmount();
+        $this->currency = $amount->getCurrency();
         return $this;
     }
 
     /**
      * Get amount
      *
-     * @return string
+     * @return Money
      */
     public function getAmount()
     {
-        return $this->amount;
+        //return Money::EUR(500);
+        //return new Money($this->amount, new Currency($this->currency));
+        return new Money(0, new Currency('EUR'));
+    }
+
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
+    }
+
+    public function getCurrency()
+    {
+        return $this->currency;
     }
 
     /**
