@@ -20,7 +20,7 @@
             <td>{% if expenserequest.datepending %}{{ expenserequest.datepending|date('d-m-Y') }}{% endif %}</td>
             <td>{% if expenserequest.dateapproved %}{{ expenserequest.dateapproved|date('d-m-Y') }}{% endif %}</td>
 
-            <td>{{ expenserequest.amount }}</td>
+            <td>{{ expenserequest.amount|money }}</td>
             <td>{{ expenserequest.description }}</td>
             <!-- username -->
             <td>{{ expenserequest.user.firstname }}</td>

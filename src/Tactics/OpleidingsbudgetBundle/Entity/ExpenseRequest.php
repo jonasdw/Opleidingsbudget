@@ -23,7 +23,7 @@ class ExpenseRequest
      */
     private $amount;
 
-    private $currency;
+    private $currency = 'EUR';
 
     /**
      * @var string
@@ -33,7 +33,7 @@ class ExpenseRequest
     /**
      * @var string
      */
-    private $status;
+    private $status = 'pending';
 
     /**
      * @var \DateTime
@@ -58,9 +58,7 @@ class ExpenseRequest
     public function __construct(User $user)
     {
         $this->date_pending = new \DateTime();
-        $this->status = "pending";
         $this->user = $user;
-        $this->currency = 'EUR';
     }
 
     /**
@@ -83,7 +81,6 @@ class ExpenseRequest
     {
         $this->amount = $amount->getAmount();
         $this->currency = $amount->getCurrency();
-        return $this;
     }
 
     /**
@@ -93,7 +90,7 @@ class ExpenseRequest
      */
     public function getAmount()
     {
-        return new Money($this->amount, new Currency('EUR'));
+        return new Money($this->amount, new Currency($this->currency));
     }
 
     public function setCurrency($currency)
