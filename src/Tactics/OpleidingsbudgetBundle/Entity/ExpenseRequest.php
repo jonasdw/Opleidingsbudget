@@ -93,9 +93,7 @@ class ExpenseRequest
      */
     public function getAmount()
     {
-        //return Money::EUR(500);
-        //return new Money($this->amount, new Currency($this->currency));
-        return new Money(0, new Currency('EUR'));
+        return new Money($this->amount, new Currency('EUR'));
     }
 
     public function setCurrency($currency)
