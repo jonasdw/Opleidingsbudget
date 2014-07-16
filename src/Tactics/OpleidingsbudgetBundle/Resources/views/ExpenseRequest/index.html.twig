@@ -23,7 +23,7 @@
                 <td>{% if expenseRequest.dateapproved %}{{ expenseRequest.dateapproved|date('d-m-Y') }}{% else %}x{% endif %}</td>
                 <td>{% if expenseRequest.dateexecuted %}{{ expenseRequest.dateexecuted|date('d-m-Y') }}{% else %}x{% endif %}</td>
 
-                <td>{{ expenseRequest.amount * -1 }}</td>
+                <td>{{ expenseRequest.amount|money}}</td>
                 <td>{{ expenseRequest.description }}</td>
 
                 <td><a href="{{ path('expenserequest_show', { 'id': expenseRequest.id }) }}">meer info</a></td>
