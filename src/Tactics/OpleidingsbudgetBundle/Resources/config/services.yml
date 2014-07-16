@@ -26,3 +26,8 @@ services:
         class: Tactics\OpleidingsbudgetBundle\Form\Type\MoneyType
         tags:
             - { name: form.type, alias: value_money }
+
+    tactics.twig.tactics_extension:
+        class: Tactics\OpleidingsbudgetBundle\Twig\TacticsExtension
+        tags:
+            - { name: twig.extension }
