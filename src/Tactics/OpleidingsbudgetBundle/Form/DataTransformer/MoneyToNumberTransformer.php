@@ -10,26 +10,12 @@ use Money\Money;
 class MoneyToNumberTransformer implements DataTransformerInterface
 {
     /**
-     * @var ObjectManager
-     */
-    private $om;
-
-    /**
-     * @param ObjectManager $om
-     */
-    public function __construct(ObjectManager $om)
-    {
-        $this->om = $om;
-    }
-
-    /**
      * @param Money|null $money
      * @return int
      */
-    public function transform($money)
+    public function transform(Money $money = null)
     {
-        if (null === $money)
-        {
+        if (null === $money) {
             return 0;
         }
 
@@ -39,16 +25,10 @@ class MoneyToNumberTransformer implements DataTransformerInterface
 
     public function reverseTransform($number)
     {
-        if (!$number)
-        {
+        if (!$number) {
             return 0;
         }
 
-        //currency?
-
-        $money = new Money($number, new Currency($currency));
-
-        return $money;
+        return Money::EUR($number);
     }
-
 }

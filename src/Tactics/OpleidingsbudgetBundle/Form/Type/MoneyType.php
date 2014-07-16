@@ -10,40 +10,26 @@ use Tactics\OpleidingsbudgetBundle\Form\DataTransformer\MoneyToNumberTransformer
 
 class MoneyType extends AbstractType
 {
-    /**
-     * @var ObjectManager
-     */
-    private $om;
-
-    /**
-     * @param ObjectManager $om
-     */
-    public function __construct(ObjectManager $om)
-    {
-        $this->om = $om;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $transformer = new MoneyToNumberTransformer($this->om);
-        $builder->addModelTransformer($transformer);
+        $builder->addModelTransformer(new MoneyToNumberTransformer());
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'invalid_message' => "This can't be a money object",
+          'currency' => 'EUR',
+          'divisor' => 100,
         ));
     }
 
     public function getParent()
     {
-        return 'text';
+        return 'money';
     }
 
     public function getName()
     {
-        return '';
+        return 'value_money';
     }
-
 }

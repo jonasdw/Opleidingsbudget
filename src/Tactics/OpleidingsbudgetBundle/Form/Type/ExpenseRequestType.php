@@ -16,11 +16,11 @@ class ExpenseRequestType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount')
+            ->add('amount', 'money')
             ->add('description')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

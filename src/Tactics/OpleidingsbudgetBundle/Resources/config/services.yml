@@ -21,3 +21,8 @@ services:
     opleidingsbudget_mailer:
         class: Tactics\OpleidingsbudgetBundle\Mailer\OpleidingsbudgetMailer
         arguments: [@mailer]
+
+    opleidingsbudget.type.money:
+        class: Tactics\OpleidingsbudgetBundle\Form\Type\MoneyType
+        tags:
+            - { name: form.type, alias: value_money }
