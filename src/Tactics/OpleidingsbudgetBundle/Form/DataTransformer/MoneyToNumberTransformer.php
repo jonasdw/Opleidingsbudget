@@ -2,8 +2,6 @@
 
 namespace Tactics\OpleidingsbudgetBundle\Form\DataTransformer;
 
-use Doctrine\Common\Persistence\ObjectManager;
-use Money\Currency;
 use Symfony\Component\Form\DataTransformerInterface;
 use Money\Money;
 
@@ -13,11 +11,13 @@ class MoneyToNumberTransformer implements DataTransformerInterface
      * @param Money|null $money
      * @return int
      */
-    public function transform(Money $money = null)
+    public function transform($money)
     {
         if (null === $money) {
             return 0;
         }
+
+        $this->guardMoney($money);
 
         return $money->getAmount();
     }
@@ -26,9 +26,20 @@ class MoneyToNumberTransformer implements DataTransformerInterface
     public function reverseTransform($number)
     {
         if (!$number) {
-            return 0;
+            return Money::EUR(0);
         }
 
-        return Money::EUR($number);
+        return Money::EUR((int)$number);
+    }
+
+    /**
+     * @param $money
+     * @throws \Exception
+     */
+    private function guardMoney($money)
+    {
+        if (!$money instanceof Money) {
+            throw new \Exception('Expected money');
+        }
     }
 }
