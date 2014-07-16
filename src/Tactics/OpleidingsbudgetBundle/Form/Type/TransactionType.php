@@ -1,12 +1,14 @@
 <?php
 
-namespace Tactics\OpleidingsbudgetBundle\Form;
+namespace Tactics\OpleidingsbudgetBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeToStringTransformer;
 
-class ExpenseRequestType extends AbstractType
+
+class TransactionType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -16,12 +18,10 @@ class ExpenseRequestType extends AbstractType
     {
         $builder
             ->add('amount')
-            ->add('description')
-//            ->add('status')
-//            ->add('date_pending')
-//            ->add('date_approved')
-//            ->add('date_executed')
-//            ->add('user_id')
+            ->add('type', 'hidden')
+            ->add('date')
+            //->add('expenserequest_id', 'hidden')
+           // ->add('user_id', 'hidden')
         ;
     }
     
@@ -31,7 +31,7 @@ class ExpenseRequestType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tactics\OpleidingsbudgetBundle\Entity\ExpenseRequest'
+            'data_class' => 'Tactics\OpleidingsbudgetBundle\Entity\Transaction'
         ));
     }
 
@@ -40,6 +40,6 @@ class ExpenseRequestType extends AbstractType
      */
     public function getName()
     {
-        return 'tactics_opleidingsbudgetbundle_expenserequest';
+        return 'tactics_opleidingsbudgetbundle_transaction';
     }
 }

@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Tactics\OpleidingsbudgetBundle\Entity\ExpenseRequest;
-use Tactics\OpleidingsbudgetBundle\Form\ExpenseRequestType;
+use Tactics\OpleidingsbudgetBundle\Form\Type\ExpenseRequestType;
 use Tactics\OpleidingsbudgetBundle\Helper\Balans;
 use Tactics\OpleidingsbudgetBundle\Entity\Transaction;
 

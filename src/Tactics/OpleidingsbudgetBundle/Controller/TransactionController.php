@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Tactics\OpleidingsbudgetBundle\Entity\Transaction;
-use Tactics\OpleidingsbudgetBundle\Form\TransactionType;
+use Tactics\OpleidingsbudgetBundle\Form\Type\TransactionType;
 use Tactics\OpleidingsbudgetBundle\Helper\Balans;
 
 /**
