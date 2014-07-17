@@ -63,7 +63,7 @@ class Transaction
     public function setAmount(Money $amount)
     {
         $this->amount = $amount->getAmount();
-        $this->currency = $amount->getCurrency();
+        $this->currency = $amount->getCurrency()->getName();
         $this->handleAmount();
     }
 

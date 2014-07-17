@@ -74,8 +74,6 @@ class TransactionController extends Controller
 
         $transaction = new Transaction($user, $type);
 
-        $this->get('transaction.service')->createTransaction($transaction);
-
         if ($type == "expense")
         {
             $em = $this->getDoctrine()->getManager();
@@ -126,7 +124,10 @@ class TransactionController extends Controller
      */
     private function processTransactionForm(FormInterface $form, Transaction $transaction)
     {
-        if ($this->get('request')->getMethod() === 'POST' && $form->isValid()) {
+        if ($this->get('request')->getMethod() === 'POST' && $form->isValid())
+        {
+            $this->get('transaction.service')->createTransaction($transaction);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($transaction);
             $em->flush();
