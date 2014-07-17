@@ -3,7 +3,7 @@
 namespace Tactics\OpleidingsbudgetBundle\Helper;
 
 use Money\Money;
-use Money\Currency;
+use Money\CurrencyPair;
 
 class Balans
 {
@@ -17,11 +17,17 @@ class Balans
 
     public function getUserBalans()
     {
+        $pair = CurrencyPair::createFromIso('USD/EUR 1.2500');
+
         $this->balans = Money::EUR(0);
 
-        foreach ($this->transactions as $transaction){
-
-            $this->balans = $this->balans->add($transaction->getAmount());
+        foreach ($this->transactions as $transaction)
+        {
+            if ($transaction->getCurrency() == 'USD'){
+                $this->balans = $this->balans->add($pair->convert($transaction->getAmount()));
+            }else{
+                $this->balans = $this->balans->add($transaction->getAmount());
+            }
         }
 
         return $this->balans;
