@@ -18,6 +18,7 @@ class TransactionType extends AbstractType
     {
         $builder
             ->add('amount', 'value_money')
+            ->add('currency') //beperkte mogelijkheden geven EUR | USD | ???
             ->add('type', 'hidden')
             ->add('date')
             //->add('expenserequest_id', 'hidden')
