@@ -23,11 +23,7 @@ class Balans
 
         foreach ($this->transactions as $transaction)
         {
-            if ($transaction->getCurrency() == 'USD'){
-                $this->balans = $this->balans->add($pair->convert($transaction->getAmount()));
-            }else{
                 $this->balans = $this->balans->add($transaction->getAmount());
-            }
         }
 
         return $this->balans;
