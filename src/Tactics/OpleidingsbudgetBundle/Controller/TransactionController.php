@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Tactics\OpleidingsbudgetBundle\Entity\Transaction;
 use Tactics\OpleidingsbudgetBundle\Form\Type\TransactionType;
 use Tactics\OpleidingsbudgetBundle\Helper\Balans;
+use Tactics\OpleidingsbudgetBundle\Service\TransactionService;
 
 /**
  * Transaction controller.
@@ -73,6 +74,7 @@ class TransactionController extends Controller
 
         $transaction = new Transaction($user, $type);
 
+        $this->get('transaction.service')->createTransaction($transaction);
 
         if ($type == "expense")
         {

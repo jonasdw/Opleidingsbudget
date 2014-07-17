@@ -8,27 +8,12 @@
 namespace Tactics\OpleidingsbudgetBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Tactics\OpleidingsbudgetBundle\Entity\Transaction;
 
-class TransactionRepository extends EntityRepository
+class TransactionRepository extends EntityRepository implements TransactionRepositoryInterface
 {
-    /*
-    public function getUserBudget($user)
+    public function save(Transaction $transaction)
     {
-        $query = $this->getEntityManager()->createQuery(
-           "SELECT t.amount
-            FROM TacticsOpleidingsbudgetBundle:Transaction t
-            WHERE t.user = :user");
-
-        $query->setParameter('user', $user);
-
-        $transactions = $query->getResult();
-        $budget = 0;
-
-        foreach ($transactions as $transaction){
-            $budget = $budget+floatval($transaction["amount"]);
-         }
-
-        return $budget;
+        var_dump("this is repository, saving");
     }
-    */
 }

@@ -1,5 +1,6 @@
 parameters:
 #    tactics_opleidingsbudget.example.class: Tactics\OpleidingsbudgetBundle\Example
+    transaction_converter.class: Tactics\OpleidingsbudgetBundle\Converter\XeTransactionConverter
 
 services:
 #    tactics_opleidingsbudget.example:
@@ -31,3 +32,18 @@ services:
         class: Tactics\OpleidingsbudgetBundle\Twig\TacticsExtension
         tags:
             - { name: twig.extension }
+
+    transaction.repository:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - Tactics\OpleidingsbudgetBundle\Entity\Transaction
+
+    transaction.converter:
+        class: "%transaction_converter.class%"
+
+    transaction.service:
+        class: Tactics\OpleidingsbudgetBundle\Service\TransactionService
+        arguments: [@transaction.repository, @transaction.converter]
+
