@@ -2,12 +2,20 @@
 <html>
     <head>
         <meta charset="UTF-8" />
+        <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
         <title>{% block title %}ob app{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        {% block stylesheets %}
+            <!-- Basic Styles -->
+            {% stylesheets 'bundles/tacticsopleidingsbudget/css/*' filter='cssrewrite' %}
+            <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}">
+            {% endstylesheets %}
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
     </head>
     <body>
-        <h1>Opleidingsbudget App</h1>
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
             <h4>Oi {{ app.user.firstname }},</h4>
             <a href="{{ path('fos_user_security_logout') }}">
@@ -36,8 +44,20 @@
             <br /><br />
         {% endif %}
 
-
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+        {% block javascripts %}
+            {% javascripts
+            '@TacticsOpleidingsbudgetBundle/Resources/public/js/libs/jquery-2.0.2.min.js'
+            '@TacticsOpleidingsbudgetBundle/Resources/public/js/*'
+            %}
+                <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    //pageSetUp();
+                })
+            </script>
+        {% endblock %}
     </body>
 </html>
