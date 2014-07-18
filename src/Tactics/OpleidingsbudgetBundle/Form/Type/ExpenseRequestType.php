@@ -16,6 +16,7 @@ class ExpenseRequestType extends AbstractType
     {
         $builder
             ->add('amount', 'value_money')
+            ->add('currency')
             ->add('description')
         ;
     }

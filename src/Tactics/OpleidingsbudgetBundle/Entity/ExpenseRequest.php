@@ -21,7 +21,7 @@ class ExpenseRequest
      * @var integer
      *
      */
-    private $amount;
+    private $amount = 0;
 
     private $currency = 'EUR';
 
@@ -80,7 +80,7 @@ class ExpenseRequest
     public function setAmount(Money $amount)
     {
         $this->amount = $amount->getAmount();
-        $this->currency = $amount->getCurrency();
+        $this->currency = $amount->getCurrency()->getName();
     }
 
     /**

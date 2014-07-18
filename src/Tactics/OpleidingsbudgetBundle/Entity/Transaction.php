@@ -64,7 +64,6 @@ class Transaction
     {
         $this->amount = $amount->getAmount();
         $this->currency = $amount->getCurrency()->getName();
-        $this->handleAmount();
     }
 
     /**
@@ -77,13 +76,6 @@ class Transaction
         return new Money($this->amount, new Currency($this->currency));
     }
 
-    private function handleAmount()
-    {
-        if ($this->type == 'expense' || $this->type == 'endofyear')
-        {
-            $this->amount = (-1 * $this->amount);
-        }
-    }
 
     public function setCurrency($currency)
     {
