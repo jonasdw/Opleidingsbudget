@@ -15,39 +15,78 @@
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
     </head>
     <body>
-    <div id="main">
-        <header>
-        <h1>opleidingsbudget app</h1>
+    <header>
 
-        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            <h4>Oi {{ app.user.firstname }},</h4>
-            <a href="{{ path('fos_user_security_logout') }}">
-                {{ 'logout'|trans({}, 'FOSUserBundle') }}
-            </a><br/>
-            <a href="{{ path('tactics_edit_user', { 'username': app.user.username }) }}">edit profile</a>
-            <br /><br />
-            {% block menu %}
-                {% if is_granted("ROLE_APPROVER") or is_granted("ROLE_EXECUTOR") %}
-                    <a href="{{ path('home') }}">home</a>
-                    <a href="{{ path('transaction_all') }}">
-                        Transactions
-                    </a>
-                    <a href="{{ path('expenserequest_all') }}">
-                        Requests
-                    </a>
-                {% elseif is_granted("ROLE_USER") %}
-                <a href="{{ path('transaction') }}">
-                    Transactions
-                </a>
-                <a href="{{ path('expenserequest') }}">
-                    Requests
-                </a>
-                {% endif %}
-            {% endblock %}
-            <br /><br />
-        {% endif %}
-        </header>
-        {% block body %}{% endblock %}
+
+
+
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!--<a class="navbar-brand" href="#">Brand</a>-->
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="menu">
+                    <ul class="nav navbar-nav">
+                        {% block menu %}
+                            {% if is_granted("ROLE_APPROVER") or is_granted("ROLE_EXECUTOR") %}
+                                <li><a href="{{ path('home') }}">home</a></li>
+                                <li><a href="{{ path('transaction_all') }}">
+                                    Transactions
+                                </a></li>
+                                <li><a href="{{ path('expenserequest_all') }}">
+                                    Requests
+                                </a></li>
+                            {% elseif is_granted("ROLE_USER") %}
+                            <li><a href="{{ path('transaction') }}">
+                                Transactions
+                            </a></li>
+                            <li><a href="{{ path('expenserequest') }}">
+                                Requests
+                            </a></li>
+                    </ul>
+                            {% endif %}
+                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+<!--                                
+                                    <h4>Oi {{ app.user.firstname }},</h4>
+                                    <a href="{{ path('fos_user_security_logout') }}">
+                                        {{ 'logout'|trans({}, 'FOSUserBundle') }}
+                                    </a><br/>
+                                    <a href="{{ path('tactics_edit_user', { 'username': app.user.username }) }}">edit profile</a>
+                                    <br /><br />
+
+                                    <br /><br />
+-->
+                                    <li class="dropdown pull-right">
+                                      <a href="javascript:void(0)" id="drop" role="button" class="dropdown-toggle" data-toggle="dropdown">Oi {{ app.user.firstname }}</a>
+
+                                      <ul class="dropdown-menu" role="menu" aria-labelledby="drop">
+                                        
+                                        <li role="presentation"><a role="menuitem" href="{{ path('tactics_edit_user', { 'username': app.user.username }) }}">edit profile</a></li>
+                                        <li role="presentation"><a role="menuitem" href="{{ path('fos_user_security_logout') }}">{{ 'logout'|trans({}, 'FOSUserBundle') }}</a></li>
+
+                                       
+
+                                      </ul>
+                                    </li>   
+
+                                {% endif %}
+                        {% endblock %}
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+</header>
+
+        <div id="main">
+            {% block body %}{% endblock %}
+        </div>
 
         {% block javascripts %}
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
