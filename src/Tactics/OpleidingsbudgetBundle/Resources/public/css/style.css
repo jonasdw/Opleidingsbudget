@@ -19,10 +19,10 @@
 
 
 table th, table{text-align: center;}
-table .fa{font-size:1.4em;}
+table .fa{font-size:1.4em;color:#000000;}
 
-.fa-plus, .fa-check{color:#00a300;}
-.fa-minus, .fa-ban{color:#f00000}
+.fa-plus, .fa-check{color:#00a300!important;}
+.fa-minus, .fa-ban{color:#f00000!important;}
 
 .budget{background: rgba(177, 232, 74, .5);}
 .expense{background: rgba(255, 96, 64, .5);}
