@@ -11,10 +11,10 @@
                 <tr>
                     <th style="width: 20px"></th>
                     <th style="width: 20px"></th>
+                    <th>User</th>
                     <th>Requested at</th>
                     <th>Amount</th>
                     <th>Description</th>
-                    <th>User</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,13 +22,10 @@
         <tr>
             <td><a href="{{ path('expenserequest_update_pending', { 'id': expenserequest.id, 'status': expenserequest.status, 'userid':expenserequest.user.id }) }}"><i class="fa fa-check"></i></a></td>
             <td><a onclick="return confirm('are u sure u want to delete?')" href="{{ path('expenserequest_delete', { 'id': expenserequest.id }) }}"><i class="fa fa-ban"></i></a></td>
+            <td>{{ expenserequest.user.firstname }}</td>
             <td>{% if expenserequest.datepending %}{{ expenserequest.datepending|date('d-m-Y') }}{% endif %}</td>
             <td>{{ expenserequest.amount|money }}</td>
             <td>{{ expenserequest.description }}</td>
-            <!-- username -->
-            <td>{{ expenserequest.user.firstname }}</td>
-            <!-- url to set date and status approved
-                 or to delete the request! -->
         </tr>
     {% endfor %}
             </tbody>
@@ -44,7 +41,7 @@
                 <tr>
                     <th style="width: 40px"></th>
                     <th style="width: 40px"></th>
-                    <th>Naam</th>
+                    <th>User</th>
                     <th>Budget</th>
                     <th>Transactions</th>
                     <th>Requests</th>
