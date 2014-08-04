@@ -24,6 +24,10 @@ table .fa{font-size:1.4em;}
 .fa-plus, .fa-check{color:#00a300;}
 .fa-minus, .fa-ban{color:#f00000}
 
+.budget{background: rgba(177, 232, 74, .5);}
+.expense{background: rgba(255, 96, 64, .5);}
+.endofyear{background: rgba(119, 196, 255, .5);}
+
 @media (max-width: 768px) {
     .pull-right{
         float: left!important;
