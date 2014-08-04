@@ -17,6 +17,13 @@
 #login input[type="checkbox"]{width:20px;}
 #login input[type="submit"]{width:75px;float:right;margin-left: 75px;}
 
+
+table th, table{text-align: center;}
+table .fa{font-size:1.4em;}
+
+.fa-plus, .fa-check{color:#00a300;}
+.fa-minus, .fa-ban{color:#f00000}
+
 @media (max-width: 768px) {
     .pull-right{
         float: left!important;
