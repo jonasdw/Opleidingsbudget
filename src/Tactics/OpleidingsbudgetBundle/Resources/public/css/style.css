@@ -1,3 +1,4 @@
+h1{margin-bottom: 30px;}
 /*MENU*/
 .dropdown{overflow: visible;}
 .dropdown .fa-caret-down, .dropdown .fa-power-off, .dropdown .fa-pencil{margin:0 8px;}
@@ -29,6 +30,27 @@ table .fa{font-size:1.4em;color:#000000;}
 .endofyear{background: rgba(148, 181, 255, .5);}
 
 .smallh2{font-size:18px;}
+
+#tactics_opleidingsbudgetbundle_transaction{width: 300px; height:auto; }
+#tactics_opleidingsbudgetbundle_transaction input,#tactics_opleidingsbudgetbundle_transaction select{height:30px; margin-bottom: 15px;}
+#tactics_opleidingsbudgetbundle_transaction label{width: 100px;float:left;line-height: 30px;}
+#tactics_opleidingsbudgetbundle_transaction_amount{width: 104px; margin-right:3px; float: left;}
+#tactics_opleidingsbudgetbundle_transaction_currency{width: 65px;}
+#tactics_opleidingsbudgetbundle_transaction_date{float: left;}
+#tactics_opleidingsbudgetbundle_transaction_submit{float:right;margin-right: 28px;width:65px;}
+select#tactics_opleidingsbudgetbundle_transaction_date_year{width: 65px!important;}
+select#tactics_opleidingsbudgetbundle_transaction_date_day{width: 45px!important;}
+select#tactics_opleidingsbudgetbundle_transaction_date_month{width: 56px!important;}
+/*
+#tactics_opleidingsbudgetbundle_transaction{width: 400px;}
+#tactics_opleidingsbudgetbundle_transaction label{width: 100px;}
+#tactics_opleidingsbudgetbundle_transaction input{width: 140px;}
+#tactics_opleidingsbudgetbundle_transaction select{width: 140px;}
+#tactics_opleidingsbudgetbundle_transaction_date{width: 170px;}
+select#tactics_opleidingsbudgetbundle_transaction_date_year{width: 60px!important;}
+select#tactics_opleidingsbudgetbundle_transaction_date_day{width: 40px!important;}
+select#tactics_opleidingsbudgetbundle_transaction_date_month{width: 50px!important;}
+*/
 
 @media (max-width: 768px) {
     .pull-right{

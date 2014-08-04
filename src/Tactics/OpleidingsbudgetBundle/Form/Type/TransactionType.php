@@ -17,12 +17,14 @@ class TransactionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount', 'value_money')
-            ->add('currency') //beperkte mogelijkheden geven EUR | USD | ???
+            ->add('amount', 'value_money', array('currency' => false, 'attr' => array('placeholder' => '0.00')) )
+            ->add('currency', 'choice', array(
+                'choices'   => array('EUR' => 'EUR', 'USD' => 'USD'),
+                'required'  => true,
+                'label'     => false,
+            ))
             ->add('type', 'hidden')
             ->add('date')
-            //->add('expenserequest_id', 'hidden')
-           // ->add('user_id', 'hidden')
         ;
     }
     
