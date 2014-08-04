@@ -15,8 +15,12 @@ class ExpenseRequestType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount', 'value_money')
-            ->add('currency')
+            ->add('amount', 'value_money', array('currency' => false, 'attr' => array('placeholder' => '0.00')) )
+            ->add('currency', 'choice', array(
+                'choices'   => array('EUR' => 'EUR', 'USD' => 'USD'),
+                'required'  => true,
+                'label'     => false,
+            ))
             ->add('description')
         ;
     }
