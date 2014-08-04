@@ -14,7 +14,7 @@ class TacticsExtension extends \Twig_Extension
     public function moneyFilter($number)
     {
         $money = $number->getAmount()/100;
-        $money = $number->getCurrency().$money;
+        $money = $number->getCurrency(). ' ' . $money;
 
         return $money;
     }
