@@ -28,6 +28,8 @@ table .fa{font-size:1.4em;color:#000000;}
 .expense{background: rgba(255, 96, 64, .5);}
 .endofyear{background: rgba(119, 196, 255, .5);}
 
+.smallh2{font-size:18px;}
+
 @media (max-width: 768px) {
     .pull-right{
         float: left!important;

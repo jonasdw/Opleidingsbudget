@@ -1,34 +1,35 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <h2>Requests | current budget: {{ budget|money }}</h2>
-    <a href="{{ path('expenserequest_new') }}">
-        Make Request
-    </a>
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Requested at</th>
-                <th>Approved at</th>
-                <th>Executed at</th>
+    <h2>Requests <span class="smallh2">(current budget: {{ budget|money }})</span></h2>
+    <a href="{{ path('expenserequest_new') }}">Make a new request</a>
+    <br /><br />
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Requested at</th>
+                    <th>Approved at</th>
+                    <th>Executed at</th>
+                    <th>Amount</th>
+                    <th>Description</th>
+                    <th style="width: 20px"></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for expenseRequest in expenseRequests %}
+                <tr class="{{ expenseRequest.status }}">
+                    <td>{% if expenseRequest.datepending %}{{ expenseRequest.datepending|date('d-m-Y') }}{% endif %}</td>
+                    <td>{% if expenseRequest.dateapproved %}{{ expenseRequest.dateapproved|date('d-m-Y') }}{% else %}x{% endif %}</td>
+                    <td>{% if expenseRequest.dateexecuted %}{{ expenseRequest.dateexecuted|date('d-m-Y') }}{% else %}x{% endif %}</td>
 
-                <th>Amount</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for expenseRequest in expenseRequests %}
-            <tr class="{{ expenseRequest.status }}">
-                <td>{% if expenseRequest.datepending %}{{ expenseRequest.datepending|date('d-m-Y') }}{% endif %}</td>
-                <td>{% if expenseRequest.dateapproved %}{{ expenseRequest.dateapproved|date('d-m-Y') }}{% else %}x{% endif %}</td>
-                <td>{% if expenseRequest.dateexecuted %}{{ expenseRequest.dateexecuted|date('d-m-Y') }}{% else %}x{% endif %}</td>
+                    <td>{{ expenseRequest.amount|money}}</td>
+                    <td>{{ expenseRequest.description }}</td>
 
-                <td>{{ expenseRequest.amount|money}}</td>
-                <td>{{ expenseRequest.description }}</td>
-
-                <td><a href="{{ path('expenserequest_show', { 'id': expenseRequest.id }) }}">meer info</a></td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                    <td><a href="{{ path('expenserequest_show', { 'id': expenseRequest.id }) }}"><i class="fa fa-info-circle"></i></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
