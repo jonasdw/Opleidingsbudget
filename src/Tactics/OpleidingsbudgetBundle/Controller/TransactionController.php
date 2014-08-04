@@ -129,7 +129,13 @@ class TransactionController extends Controller
             $this->get('transaction.service')->createTransaction($transaction);
 
             $em = $this->getDoctrine()->getManager();
+
+            $expense = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->find($transaction->getExpenserequest()->getId());
+            $expense->setStatus('executed');
+            $expense->setDateExecuted(new \DateTime());
+
             $em->persist($transaction);
+            $em->persist($expense);
             $em->flush();
 
             return true;

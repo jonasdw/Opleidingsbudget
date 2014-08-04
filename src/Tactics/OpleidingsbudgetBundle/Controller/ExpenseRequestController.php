@@ -257,10 +257,6 @@ class ExpenseRequestController extends Controller
         }
         elseif ($status == "approved")
         {
-            $entity->setStatus('executed');
-            $entity->setDateExecuted(new \DateTime());
-            $em->flush();
-
             return $this->redirect($this->generateUrl('transaction_new', array('userid' => $userid, 'type' => 'expense', 'expenserequestid' => $id )));
         }
         $em->flush();
