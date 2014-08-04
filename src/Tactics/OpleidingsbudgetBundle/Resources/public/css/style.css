@@ -52,6 +52,10 @@ select#tactics_opleidingsbudgetbundle_expenserequest_date_year{width: 65px!impor
 select#tactics_opleidingsbudgetbundle_expenserequest_date_day{width: 45px!important;}
 select#tactics_opleidingsbudgetbundle_expenserequest_date_month{width: 56px!important;}
 #tactics_opleidingsbudgetbundle_expenserequest_description{width:275px;margin-bottom: 15px;}
+
+.expense-show{width: 550px;}
+.expense-show td{text-align: left; width: 400px;margin-left: 25px;}
+.expense-show th{text-align:right; width:150px; }
 /*
 #tactics_opleidingsbudgetbundle_transaction{width: 400px;}
 #tactics_opleidingsbudgetbundle_transaction label{width: 100px;}
