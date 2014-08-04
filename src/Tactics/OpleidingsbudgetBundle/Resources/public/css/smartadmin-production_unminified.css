@@ -15424,17 +15424,14 @@ html {
   padding: 0;
   height: 100%;
   overflow-x: hidden !important;
-  /*- disabled for widget chrome bug */
-  background: url('../img/mybg.png') #ffffff;
+
 }
 body {
   margin: 0;
   padding: 0;
   height: 100%;
   overflow: hidden;
-  /*- disabled for widget chrome bug */
-  background: url('../img/mybg.png') #ffffff;
-  direction: ltr;
+
 }
 a:hover,
 a:active,

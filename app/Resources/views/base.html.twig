@@ -6,7 +6,7 @@
         <title>{% block title %}ob app{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         {% block stylesheets %}
-            <!-- Basic Styles -->
+            <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
             {% stylesheets  '@TacticsOpleidingsbudgetBundle/Resources/public/css/*' filter='cssrewrite' %}
             <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}">
             {% endstylesheets %}
@@ -16,10 +16,7 @@
     </head>
     <body>
     <header>
-
-
-
-
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <nav class="navbar navbar-inverse" role="navigation">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -30,61 +27,39 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <!--<a class="navbar-brand" href="#">Brand</a>-->
                 </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
+
                 <div class="collapse navbar-collapse" id="menu">
                     <ul class="nav navbar-nav">
                         {% block menu %}
                             {% if is_granted("ROLE_APPROVER") or is_granted("ROLE_EXECUTOR") %}
                                 <li><a href="{{ path('home') }}">home</a></li>
                                 <li><a href="{{ path('transaction_all') }}">
-                                    Transactions
+                                    transactions
                                 </a></li>
                                 <li><a href="{{ path('expenserequest_all') }}">
-                                    Requests
+                                    requests
                                 </a></li>
                             {% elseif is_granted("ROLE_USER") %}
-                            <li><a href="{{ path('transaction') }}">
-                                Transactions
-                            </a></li>
-                            <li><a href="{{ path('expenserequest') }}">
-                                Requests
-                            </a></li>
-                    </ul>
-                            {% endif %}
-                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-<!--                                
-                                    <h4>Oi {{ app.user.firstname }},</h4>
-                                    <a href="{{ path('fos_user_security_logout') }}">
-                                        {{ 'logout'|trans({}, 'FOSUserBundle') }}
-                                    </a><br/>
-                                    <a href="{{ path('tactics_edit_user', { 'username': app.user.username }) }}">edit profile</a>
-                                    <br /><br />
-
-                                    <br /><br />
--->
-                                    <li class="dropdown pull-right">
-                                      <a href="javascript:void(0)" id="drop" role="button" class="dropdown-toggle" data-toggle="dropdown">Oi {{ app.user.firstname }}</a>
-
-                                      <ul class="dropdown-menu" role="menu" aria-labelledby="drop">
-                                        
-                                        <li role="presentation"><a role="menuitem" href="{{ path('tactics_edit_user', { 'username': app.user.username }) }}">edit profile</a></li>
-                                        <li role="presentation"><a role="menuitem" href="{{ path('fos_user_security_logout') }}">{{ 'logout'|trans({}, 'FOSUserBundle') }}</a></li>
-
-                                       
-
-                                      </ul>
-                                    </li>   
-
-                                {% endif %}
+                            <li><a href="{{ path('transaction') }}">transactions</a></li>
+                            <li><a href="{{ path('expenserequest') }}">requests</a></li>
+                        {% endif %}
+                            <li class="dropdown pull-right">
+                            <a href="javascript:void(0)" id="drop" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-down hidden-xs"></i>Oi {{ app.user.firstname }}<i class="fa fa-caret-down hidden-lg hidden-md hidden-sm"></i></a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="drop">
+                                    <li role="presentation"><a role="menuitem" href="{{ path('tactics_edit_user', { 'username': app.user.username }) }}"><i class="fa fa-pencil"></i>edit profile</a></li>
+                                    <li role="presentation"><a role="menuitem" href="{{ path('fos_user_security_logout') }}"><i class="fa fa-power-off"></i>{{ 'logout'|trans({}, 'FOSUserBundle') }}</a></li>
+                                </ul>
+                            </li>
                         {% endblock %}
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
-</header>
+        {% endif %}
 
+    </header>
         <div id="main">
+
             {% block body %}{% endblock %}
         </div>
 
@@ -103,6 +78,12 @@
             <script type="text/javascript">
                 $(document).ready(function() {
                     pageSetUp();
+
+                    //make active menu buttons
+                    var url = window.location;
+                    $('ul.nav a').filter(function() {
+                        return this.href == url;
+                    }).parent().addClass('active');
                 })
             </script>
         {% endblock %}
