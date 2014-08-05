@@ -60,7 +60,7 @@ class TransactionController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         return $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findAll(
-            array('date' => 'ASC')
+            array('date' => 'DESC')
         );
     }
 

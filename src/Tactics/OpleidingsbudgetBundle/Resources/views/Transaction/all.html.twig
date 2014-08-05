@@ -4,7 +4,7 @@
     <h2>All Transactions</h2>
 
     <div class="table-responsive">
-        <table class="table">
+        <table class="table" id="transactions">
             <thead>
                 <tr>
                     <th>User</th>
@@ -29,5 +29,17 @@
             </tbody>
         </table>
     </div>
+{% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#transactions').dataTable( {
+                "bPaginate": false
+            } );
+
+        } );
+    </script>
 {% endblock %}
