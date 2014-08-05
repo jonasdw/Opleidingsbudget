@@ -1,3 +1,4 @@
+html, body {background-image: none!important;}
 h1{margin-bottom: 30px;}
 /*MENU*/
 .dropdown{overflow: visible;}
@@ -20,6 +21,7 @@ h1{margin-bottom: 30px;}
 
 
 table th, table{text-align: center;}
+table thead, table thead tr, table thead tr th{background-color: #fff!important;border-top: 1px solid #E2E2E2;}
 table .fa{font-size:1.4em;color:#000000;}
 
 .fa-plus, .fa-check{color:#00a300!important;}
@@ -60,16 +62,11 @@ select#tactics_opleidingsbudgetbundle_expenserequest_date_month{width: 56px!impo
 .expense-show{width: 550px;}
 .expense-show td{text-align: left; width: 400px;margin-left: 25px;}
 .expense-show th{text-align:right; width:150px; }
-/*
-#tactics_opleidingsbudgetbundle_transaction{width: 400px;}
-#tactics_opleidingsbudgetbundle_transaction label{width: 100px;}
-#tactics_opleidingsbudgetbundle_transaction input{width: 140px;}
-#tactics_opleidingsbudgetbundle_transaction select{width: 140px;}
-#tactics_opleidingsbudgetbundle_transaction_date{width: 170px;}
-select#tactics_opleidingsbudgetbundle_transaction_date_year{width: 60px!important;}
-select#tactics_opleidingsbudgetbundle_transaction_date_day{width: 40px!important;}
-select#tactics_opleidingsbudgetbundle_transaction_date_month{width: 50px!important;}
-*/
+
+.table-striped>tbody>tr:nth-child(even)>td,
+.table-striped>tbody>tr:nth-child(even)>th {
+    background-color: #fffbf5;
+}
 
 @media (max-width: 768px) {
     .pull-right{
