@@ -75,3 +75,5 @@ select#tactics_opleidingsbudgetbundle_expenserequest_date_month{width: 56px!impo
 }
 nav ul li.active > a:before{
     content: '';}
+
+b.collapse-sign{display:none;}
