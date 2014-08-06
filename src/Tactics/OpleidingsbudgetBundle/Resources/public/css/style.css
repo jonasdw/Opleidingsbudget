@@ -32,6 +32,7 @@ table .fa{font-size:1.4em;color:#000000;}
 .endofyear{background: rgba(148, 181, 255, .5);}
 
 #transactions_filter, #expenserequests_filter{margin-top:-5px; margin-left:100px;}
+#expenserequests_filter{margin-left:40px;}
 #transactions_filter label, #expenserequests_filter label{visibility: hidden;}
 #transactions_filter label>input, #expenserequests_filter label>input{visibility: visible; float:right;}
 
