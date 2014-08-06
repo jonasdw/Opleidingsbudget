@@ -91,6 +91,7 @@ class TransactionController extends Controller
 
         return $this->render('TacticsOpleidingsbudgetBundle:Transaction:new.html.twig', array(
             'transaction' => $transaction,
+            'user' => $user,
             'form'   => $form->createView(),
         ));
     }

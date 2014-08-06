@@ -1,33 +1,53 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <h2>Transactions</h2>
+    <h2>All Transactions</h2>
 
-    <br /><br />
-    <table class="records_list">
-        <thead>
-        <tr>
-            <th>Datum</th>
-            <th>Bedrag</th>
-            <th>Info</th>
-            <th>User</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for transaction in transactions %}
-            <tr class="{{ transaction.type }}">
-                <td>{% if transaction.date %}{{ transaction.date|date('d-m-Y') }}{% endif %}</td>
-                <td>{{ transaction.amount|money }}</td>
-                {% if transaction.type == 'expense' %}
-                    <td><a href="{{ path('expenserequest_show', {'id': transaction.expenserequest.id}) }}">info</a></td>
-                {% else %}
-                    <td>geen extra info</td>
-                {% endif %}
-                <td>{{ transaction.user.firstname }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-bordered" id="transactions">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Date</th>
+                    <th>Amount (EUR)</th>
+                    <th style="width: 20px">Info</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for transaction in transactions %}
+                <tr class="{{ transaction.type }}">
+                    <td>{{ transaction.user.firstname }}</td>
+                    <td>{% if transaction.date %}{{ transaction.date|date('d/M/Y') }}{% endif %}</td>
+                    <td>{{ transaction.amount|moneynocurrency }}</td>
+                    {% if transaction.type == 'expense' %}
+                        <td><a href="{{ path('expenserequest_show', {'id': transaction.expenserequest.id}) }}"><i class="fa fa-info-circle"></i></a></td>
+                    {% else %}
+                        <td>x</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="//cdn.datatables.net/plug-ins/725b2a2115b/sorting/date-dd-MMM-yyyy.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+           $('#transactions').dataTable( {
+                columnDefs: [
+                    { type: 'date-dd-mmm-yyyy', targets: 1 },
+                ],
+               "order": [[ 1, "desc" ]],
+               "aoColumnDefs": [
+                   { 'bSortable': false, 'aTargets': [ 3 ] }
+               ],
+                "bPaginate": false
+            });
 
+        } );
+    </script>
 {% endblock %}

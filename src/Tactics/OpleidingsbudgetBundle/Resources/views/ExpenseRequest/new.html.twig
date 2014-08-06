@@ -1,6 +1,14 @@
 {% extends '::base.html.twig' %}
 
-{% block body %}
-    <h2>Make request | current budget: </h2>
+{% block body -%}
+    <h1>Create new expenserequest</h1>
     {{ form(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.getElementById("tactics_opleidingsbudgetbundle_transaction_amount").value = "";
+    </script>
 {% endblock %}

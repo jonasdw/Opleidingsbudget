@@ -1,15 +1,14 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Transaction creation</h1>
-
+    <h1>Create transaction for <b>{{ user.firstname }}</b></h1>
     {{ form(form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('transaction') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.getElementById("tactics_opleidingsbudgetbundle_transaction_amount").value = "";
+    </script>
 {% endblock %}

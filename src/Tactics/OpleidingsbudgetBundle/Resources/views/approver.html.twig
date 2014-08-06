@@ -1,64 +1,64 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
+    {% if expenserequests is not empty %}
+
     <h2>Requests</h2>
-    <table class="records_list">
-        <thead>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th style="width: 20px"></th>
+                    <th style="width: 20px"></th>
+                    <th>User</th>
+                    <th>Requested at</th>
+                    <th>Amount</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+    {% for expenserequest in expenserequests %}
         <tr>
-            <th>Requested at</th>
-
-            <th>Amount</th>
-            <th>Description</th>
-            <th>User</th>
-            <th></th>
+            <td><a href="{{ path('expenserequest_update_pending', { 'id': expenserequest.id, 'status': expenserequest.status, 'userid':expenserequest.user.id }) }}"><i class="fa fa-check"></i></a></td>
+            <td><a onclick="return confirm('are u sure u want to delete?')" href="{{ path('expenserequest_delete', { 'id': expenserequest.id }) }}"><i class="fa fa-ban"></i></a></td>
+            <td>{{ expenserequest.user.firstname }}</td>
+            <td>{% if expenserequest.datepending %}{{ expenserequest.datepending|date('d-m-Y') }}{% endif %}</td>
+            <td>{{ expenserequest.amount|money }}</td>
+            <td>{{ expenserequest.description }}</td>
         </tr>
-        </thead>
-        <tbody>
-        {% for expenserequest in expenserequests %}
-            <tr>
-                <td>{% if expenserequest.datepending %}{{ expenserequest.datepending|date('d-m-Y') }}{% endif %}</td>
-                <td>{{ expenserequest.amount|money }}</td>
-                <td>{{ expenserequest.description }}</td>
-                <!-- username -->
-                <td>{{ expenserequest.user.firstname }}</td>
-                <!-- url to set date and status approved
-                     or to delete the request! -->
-                <td><a href="{{ path('expenserequest_update_pending', { 'id': expenserequest.id, 'status': expenserequest.status, 'userid':expenserequest.user.id }) }}">approve</a></td>
-                <td><a onclick="return confirm('are u sure u want to delete?')" href="{{ path('expenserequest_delete', { 'id': expenserequest.id }) }}">delete</a></td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-
+    {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
 
     <h2>All users</h2>
-    <table class="records_list">
-        <thead>
-        <tr>
-            <th>Naam</th>
-            <th>Budget</th>
-            <th>Transactions</th>
-            <th>Requests</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for data in usersdata %}
-            <tr>
-                <td>{{ data.user.name }}</td>
-                <td> {{ data.transactions.balans|money }}</td>
-                <td>{{ data.transactions.count }}</td>
-                <td>{{ data.requests.count }}</td>
-                <td><a href="{{ path('transaction_new', { 'userid': data.user.id, 'type': 'budget' }) }}">make rich</a></td>
-                <td><a href="{{ path('transaction_new', { 'userid': data.user.id, 'type': 'endofyear' }) }}">make poor</a></td>
 
-                <!-- url to set date and status approved
-                     or to delete the request! -->
-
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-striped  table-bordered">
+            <thead>
+                <tr>
+                    <th style="width: 40px"></th>
+                    <th style="width: 40px"></th>
+                    <th>User</th>
+                    <th>Budget</th>
+                    <th>Transactions</th>
+                    <th>Requests</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for data in usersdata %}
+                <tr>
+                    <td><a href="{{ path('transaction_new', { 'userid': data.user.id, 'type': 'budget' }) }}"><i class="fa fa-plus"></i></a></td>
+                    <td><a href="{{ path('transaction_new', { 'userid': data.user.id, 'type': 'endofyear' }) }}"><i class="fa fa-minus"></i></a></td>
+                    <td>{{ data.user.name }}</td>
+                    <td> {{ data.transactions.balans|money }}</td>
+                    <td>{{ data.transactions.count }}</td>
+                    <td>{{ data.requests.count }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
