@@ -37,12 +37,6 @@
     <script type="text/javascript" src="//cdn.datatables.net/plug-ins/725b2a2115b/sorting/date-dd-MMM-yyyy.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            /*
-           $('#transactions').dataTable({
-              "bPaginate": false
-               }
-            );
-*/
            $('#transactions').dataTable( {
                 columnDefs: [
                     { type: 'date-dd-mmm-yyyy', targets: 1 },
