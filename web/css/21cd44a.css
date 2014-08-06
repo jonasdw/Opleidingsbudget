@@ -29434,9 +29434,9 @@ table .fa{font-size:1.4em;color:#000000;}
 .expense{background: rgba(255, 96, 64, .5);}
 .endofyear{background: rgba(148, 181, 255, .5);}
 
-#transactions_filter{margin-top:-5px; margin-left:100px;}
-#transactions_filter label{visibility: hidden;}
-#transactions_filter label>input{visibility: visible; float:right;}
+#transactions_filter, #expenserequests_filter{margin-top:-5px; margin-left:100px;}
+#transactions_filter label, #expenserequests_filter label{visibility: hidden;}
+#transactions_filter label>input, #expenserequests_filter label>input{visibility: visible; float:right;}
 
 .smallh2{font-size:18px;}
 
