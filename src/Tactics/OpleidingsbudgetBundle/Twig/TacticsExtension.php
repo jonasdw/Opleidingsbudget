@@ -8,6 +8,7 @@ class TacticsExtension extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFilter('money', array($this, 'moneyFilter')),
+            new \Twig_SimpleFilter('moneynocurrency', array($this, 'moneyFilterNoCurrency')),
         );
     }
 
@@ -15,6 +16,13 @@ class TacticsExtension extends \Twig_Extension
     {
         $money = $number->getAmount()/100;
         $money = $number->getCurrency(). ' ' . $money;
+
+        return $money;
+    }
+
+    public function moneyFilterNoCurrency($number)
+    {
+        $money = $number->getAmount()/100;
 
         return $money;
     }

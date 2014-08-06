@@ -9,7 +9,7 @@
                 <tr>
                     <th>User</th>
                     <th>Date</th>
-                    <th>Amount</th>
+                    <th>Amount (EUR)</th>
                     <th style="width: 20px">Info</th>
                 </tr>
             </thead>
@@ -17,8 +17,8 @@
             {% for transaction in transactions %}
                 <tr class="{{ transaction.type }}">
                     <td>{{ transaction.user.firstname }}</td>
-                    <td>{% if transaction.date %}{{ transaction.date|date('d-m-Y') }}{% endif %}</td>
-                    <td>{{ transaction.amount|money }}</td>
+                    <td>{% if transaction.date %}{{ transaction.date|date('d/M/Y') }}{% endif %}</td>
+                    <td>{{ transaction.amount|moneynocurrency }}</td>
                     {% if transaction.type == 'expense' %}
                         <td><a href="{{ path('expenserequest_show', {'id': transaction.expenserequest.id}) }}"><i class="fa fa-info-circle"></i></a></td>
                     {% else %}
