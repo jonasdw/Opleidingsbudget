@@ -59,9 +59,16 @@ class TransactionController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+<<<<<<< Updated upstream
         return $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findAll(
             array('date' => 'ASC')
         );
+=======
+        /*return $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findAll(
+            array('date' => 'DESC')
+        );*/
+        return $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findAll();
+>>>>>>> Stashed changes
     }
 
     /**

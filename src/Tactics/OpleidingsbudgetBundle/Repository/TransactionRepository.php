@@ -16,4 +16,9 @@ class TransactionRepository extends EntityRepository implements TransactionRepos
     {
         var_dump("this is repository, saving");
     }
+
+    public function findAll()
+    {
+        return $this->findBy(array(), array('date' => 'DESC'));
+    }
 }
