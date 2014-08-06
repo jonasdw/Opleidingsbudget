@@ -40,10 +40,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#expenserequests').dataTable( {
-                "order": [[ 0, "asc" ]],
-                "aoColumnDefs": [
-                    { 'bSortable': false, 'aTargets': [ 6 ] }
-                ],
+                "bSort" : false,
                 "bPaginate": false
             });
 
