@@ -4,7 +4,7 @@
     <h2>All Transactions</h2>
 
     <div class="table-responsive">
-        <table class="table" id="transactions">
+        <table class="table table-bordered" id="transactions">
             <thead>
                 <tr>
                     <th>User</th>
@@ -34,11 +34,25 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript" src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="//cdn.datatables.net/plug-ins/725b2a2115b/sorting/date-dd-MMM-yyyy.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#transactions').dataTable( {
+            /*
+           $('#transactions').dataTable({
+              "bPaginate": false
+               }
+            );
+*/
+           $('#transactions').dataTable( {
+                columnDefs: [
+                    { type: 'date-dd-mmm-yyyy', targets: 1 },
+                ],
+               "order": [[ 1, "desc" ]],
+               "aoColumnDefs": [
+                   { 'bSortable': false, 'aTargets': [ 3 ] }
+               ],
                 "bPaginate": false
-            } );
+            });
 
         } );
     </script>
