@@ -38,9 +38,7 @@ class TransactionController extends Controller
 
     private function getTransactionsPerUser($user)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        return  $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findByUser($user);
+        return  $this->get('transaction.repository')->findByUser($user);
     }
 
     /**
@@ -48,18 +46,9 @@ class TransactionController extends Controller
      */
     public function allAction()
     {
-        $transactions = $this->getAllTransactions();
-
         return $this->render('TacticsOpleidingsbudgetBundle:Transaction:all.html.twig', array(
-            'transactions' => $transactions
+            'transactions' => $this->get('transaction.repository')->findAll()
         ));
-    }
-
-    private function getAllTransactions()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        return $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->findAll();
     }
 
     /**
@@ -72,10 +61,8 @@ class TransactionController extends Controller
 
         $transaction = new Transaction($user, $type);
 
-        if ($type == "expense")
-        {
-            $em = $this->getDoctrine()->getManager();
-            $expense = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->find(array ('id' => $expenserequestid));
+        if ($type == "expense") {
+            $expense = $this->get('expenserequest.repository')->find($expenserequestid);
 
             $transaction->setExpenserequest($expense);
         }
@@ -134,13 +121,10 @@ class TransactionController extends Controller
 
     /**
      * Finds and displays a Transaction entity.
-     *
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->find($id);
+        $entity = $this->get('transaction.repository')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Transaction entity.');
@@ -159,9 +143,7 @@ class TransactionController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->find($id);
+        $entity = $this->get('transaction.repository')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Transaction entity.');
@@ -201,9 +183,7 @@ class TransactionController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->find($id);
+        $entity = $this->get('transaction.repository')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Transaction entity.');
@@ -235,13 +215,13 @@ class TransactionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('TacticsOpleidingsbudgetBundle:Transaction')->find($id);
+            $entity = $this->get('transaction.repository')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Transaction entity.');
             }
 
+            $em = $this->getDoctrine()->getManager();
             $em->remove($entity);
             $em->flush();
         }
