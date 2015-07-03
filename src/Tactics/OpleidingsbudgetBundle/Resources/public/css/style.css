@@ -13,11 +13,11 @@ h1{margin-bottom: 30px;}
 /*MAIN*/
 #main{width:90%; margin:50px auto;}
 
-#login{width:250px;margin:200px auto 0 auto;}
-#login label{width:100px;}
+#login{width:250px;margin:100px auto 0 auto;}
+#login label{width:250px;}
 #login input{width:250px;}
 #login input[type="checkbox"]{width:20px;}
-#login input[type="submit"]{width:75px;float:right;margin-left: 75px;}
+#login input[type="submit"]{width:75px;float:right;margin-left: 75px; margin-top:8px;}
 
 
 table th, table{text-align: center;}
@@ -78,3 +78,7 @@ nav ul li.active > a:before{
     content: '';}
 
 b.collapse-sign{display:none;}
+
+
+
+.form-group{margin-bottom:10px!important;}

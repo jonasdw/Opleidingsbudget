@@ -19,20 +19,31 @@ class RegistrationFormType extends BaseType
 
         $builder
                 ->remove('username')
-                ->add('email', 'email', array('label' => 'email', 'translation_domain' => 'FOSUserBundle'))
+                ->add('email', 'email', array(
+                    'label' => 'email',
+                    'translation_domain' => 'FOSUserBundle',
+                    'attr' => array('class' => 'form-control'),
+                ))
                 ->remove('plainPassword')
-                ->add('first_name', 'text', array('label' => 'first name', 'translation_domain' => 'FOSUserBundle'))
-                ->add('name', 'text', array('label' => 'last name', 'translation_domain' => 'FOSUserBundle'))
+                ->add('first_name', 'text', array(
+                    'label' => 'first name',
+                    'translation_domain' => 'FOSUserBundle',
+                    'attr' => array('class' => 'form-control'),
+                ))
+                ->add('name', 'text', array(
+                    'label' => 'last name',
+                    'translation_domain' => 'FOSUserBundle',
+                    'attr' => array('class' => 'form-control'),
+                ))
                 ->add('plainPassword', 'repeated', array(
                     'type' => 'password',
                     'options' => array('translation_domain' => 'FOSUserBundle'),
-                    'first_options' => array('label' => 'password'),
-                    'second_options' => array('label' => 'confirm password'),
+                    'first_options' => array('label' => 'password', 'attr' => array('class' => 'form-control')),
+                    'second_options' => array('label' => 'confirm password', 'attr' => array('class' => 'form-control')),
                     'invalid_message' => 'fos_user.password.mismatch',
                 ));
-
-
     }
+
     public function getName()
     {
         return 'registration';
