@@ -17,7 +17,7 @@ class ExpenseRequestType extends AbstractType
         $builder
             ->add('amount', 'value_money', array('currency' => false, 'attr' => array('placeholder' => '0.00')) )
             ->add('currency', 'choice', array(
-                'choices'   => array('EUR' => 'EUR', 'USD' => 'USD'),
+                'choices'   => array('EUR' => 'EUR', 'USD' => 'USD', 'GBP' => 'GBP'),
                 'required'  => true,
                 'label'     => false,
             ))
