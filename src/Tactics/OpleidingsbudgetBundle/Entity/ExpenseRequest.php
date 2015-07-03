@@ -55,6 +55,12 @@ class ExpenseRequest
      */
     private $user;
 
+    public function execute()
+    {
+        $this->setStatus('executed');
+        $this->setDateExecuted(new \DateTime());
+    }
+
     public function __construct(User $user)
     {
         $this->date_pending = new \DateTime();

@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jonas_000
- * Date: 4/07/14
- * Time: 16:27
- */
+
 namespace Tactics\OpleidingsbudgetBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
@@ -14,7 +9,8 @@ class TransactionRepository extends EntityRepository implements TransactionRepos
 {
     public function save(Transaction $transaction)
     {
-        var_dump("this is repository, saving");
+        $this->getEntityManager()->persist($transaction);
+        $this->getEntityManager()->flush();
     }
 
     public function findAll()

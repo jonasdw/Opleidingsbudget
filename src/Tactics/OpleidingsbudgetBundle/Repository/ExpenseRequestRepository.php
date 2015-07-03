@@ -1,16 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jonas_000
- * Date: 4/07/14
- * Time: 16:27
- */
+
 namespace Tactics\OpleidingsbudgetBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Tactics\OpleidingsbudgetBundle\Entity\ExpenseRequest;
 
-class ExpenseRequestRepository extends EntityRepository
+class ExpenseRequestRepository extends EntityRepository implements ExpenseRequestRepositoryInterface
 {
+    public function save(ExpenseRequest $expenseRequest)
+    {
+        $this->getEntityManager()->persist($expenseRequest);
+        $this->getEntityManager()->flush();
+    }
+
     public function getPendingExpenseRequest()
     {
         $query = $this->getEntityManager()->createQuery(

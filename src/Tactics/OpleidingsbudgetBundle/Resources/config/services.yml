@@ -40,10 +40,17 @@ services:
         arguments:
             - Tactics\OpleidingsbudgetBundle\Entity\Transaction
 
+    expenserequest.repository:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - Tactics\OpleidingsbudgetBundle\Entity\ExpenseRequest
+
     transaction.converter:
         class: "%transaction_converter.class%"
 
     transaction.service:
         class: Tactics\OpleidingsbudgetBundle\Service\TransactionService
-        arguments: [@transaction.repository, @transaction.converter]
+        arguments: [@transaction.repository, @expenserequest.repository, @transaction.converter]
 

@@ -123,19 +123,8 @@ class TransactionController extends Controller
      */
     private function processTransactionForm(FormInterface $form, Transaction $transaction)
     {
-        if ($this->get('request')->getMethod() === 'POST' && $form->isValid())
-        {
+        if ($this->get('request')->getMethod() === 'POST' && $form->isValid()) {
             $this->get('transaction.service')->createTransaction($transaction);
-
-            $em = $this->getDoctrine()->getManager();
-
-            $expense = $em->getRepository('TacticsOpleidingsbudgetBundle:ExpenseRequest')->find($transaction->getExpenserequest()->getId());
-            $expense->setStatus('executed');
-            $expense->setDateExecuted(new \DateTime());
-
-            $em->persist($transaction);
-            $em->persist($expense);
-            $em->flush();
 
             return true;
         }
